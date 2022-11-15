@@ -30,3 +30,6 @@ Een lijst van alle onderdelen (Source: [Officieel Lesmateriaal](https://gitlab.f
 | LED bar (10 LEDs)              |   1x   |
 | Traffic light 3 LED module)    |   1x   |
 | 7 segment display (4 digits)   |   1x   |
+
+Een Foto van de kit zoals hij er ongeveel uit zag: 
+![EmbeddedSystems](assets/embedded_kit.jpg)
