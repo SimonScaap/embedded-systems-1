@@ -5,22 +5,28 @@
 #define LED_PIN 21
 #define HIGH 1
 #define LOW 0
+
+
   
 void app_main() {
     // Setup
+    int delay_ms = 1500;
+    int count = 10;
     gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
     
     // Main loop voor het blinken
-    while (true) {
+    for (size_t i = 0; i < count; i++)
+    
+    {
         // Zet led pin aan en delayt
         gpio_set_level(LED_PIN, HIGH);
         printf("Blinkie AAN\n");
-        vTaskDelay(1000 / portTICK_PERIOD_MS); // 1000 milliseconde = 1 seconde
+        vTaskDelay(delay_ms / portTICK_PERIOD_MS); // 1000 milliseconde = 1 seconde
         
         // Zet led pin uit en delayt
         gpio_set_level(LED_PIN, LOW);
         printf("Blinkie UIT\n");
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        vTaskDelay(delay_ms / portTICK_PERIOD_MS);
 
     }
     

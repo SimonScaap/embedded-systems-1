@@ -1,9 +1,11 @@
 # Embedded Systems 1
 
 ## Simon Zweers, IT102
+
 Dit is de git-repository waarin alle projectjes en programma's voor het vak "Embedded Systems 1" in staan. Het vak bestaat uit een praktisch en theoretisch deel. In deze repository word vooral het practisch deel (De projecten en programma's) gedocumenteerd met alle source-code.
 
 ### De embedded kit
+
 We kopen allemaal een "Embedded Kit" die door docenten van de HvA samengesteld is.
 
 Een lijst van alle onderdelen (Source: [Officieel Lesmateriaal](https://gitlab.fdmci.hva.nl/embedded-systems-1/lesmateriaal/-/blob/main/README.md#modal-confirm-fork-webide)).
@@ -31,5 +33,5 @@ Een lijst van alle onderdelen (Source: [Officieel Lesmateriaal](https://gitlab.f
 | Traffic light 3 LED module)    |   1x   |
 | 7 segment display (4 digits)   |   1x   |
 
-Een Foto van de kit zoals hij er ongeveel uit zag: 
+Een Foto van de kit zoals hij er ongeveel uit zag:
 ![EmbeddedSystems](assets/embedded_kit.jpg)
