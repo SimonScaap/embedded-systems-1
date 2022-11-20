@@ -1,3 +1,8 @@
+/*
+Dit programma is om een LED met een constant interval te laten blinken
+@author Simon Zweers
+@date 20 11 2022
+*/
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
