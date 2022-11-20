@@ -1,6 +1,7 @@
 /*
-
-
+Dit programma laat een led blinken in het patroon van een hartslag
+@author Simon Zweers
+@date 20 11 2022
 */
 
 
