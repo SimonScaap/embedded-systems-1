@@ -4,7 +4,6 @@ Dit programma laat een led blinken in het patroon van een hartslag
 @date 20 11 2022
 */
 
-
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
