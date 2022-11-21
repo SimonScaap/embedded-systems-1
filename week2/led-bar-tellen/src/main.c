@@ -21,8 +21,10 @@ void app_main() {
     for (size_t x = 0; x < count; x++)
     {
         printf("Begingetal: %d\n", x); // print begin nummer
+
         // Zet index i in een nieuwe variabele
         int begin_number = x;
+
         for (size_t i = 0; i < digits; i++)
         {
             // Brekent de grootste macht van 2 die van het begingetal afgetrokken kan worden
@@ -41,9 +43,6 @@ void app_main() {
             }
             printf(" new: %d\n", begin_number);
         }
-
         printf("\n");
     }
-    
-
 }
