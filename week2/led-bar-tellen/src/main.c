@@ -18,6 +18,7 @@ void app_main() {
     int digits = 4;
     int begin_number = 6;
     
+    printf("Begingetal: %d\n", begin_number); // print begin nummer
 
     for (size_t i = 0; i < digits; i++)
     {
@@ -25,13 +26,13 @@ void app_main() {
         int subtract = pow(2,(digits - (i+1)));  
 
         // Print het getal dat afgetrokken word en het oude getal
-        printf("Subtract: %-3d old: %-3d", subtract, begin_number);
+        printf("Bit-Worth: %-3d ",subtract);
 
         if (begin_number - subtract  >=  0) {
-            printf("1");
+            printf("Bit: 1");
             begin_number = begin_number - subtract; // Trekt alleen de subtract waarde af wanneer het resultaat groter dan of geloijk aan 0 is
         } else {
-            printf("0");
+            printf("Bit: 0");
         }
         printf(" new: %d\n", begin_number);
     }
