@@ -16,26 +16,34 @@ void app_main() {
     printf("Set pin 4 to HIGH\n");
 
     int digits = 4;
-    int begin_number = 6;
+    int count = 15;
     
-    printf("Begingetal: %d\n", begin_number); // print begin nummer
-
-    for (size_t i = 0; i < digits; i++)
+    for (size_t x = 0; x < count; x++)
     {
-        // Brekent de grootste macht van 2 die van het begingetal afgetrokken kan worden
-        int subtract = pow(2,(digits - (i+1)));  
+        printf("Begingetal: %d\n", x); // print begin nummer
+        // Zet index i in een nieuwe variabele
+        int begin_number = x;
+        for (size_t i = 0; i < digits; i++)
+        {
+            // Brekent de grootste macht van 2 die van het begingetal afgetrokken kan worden
+            int subtract = pow(2,(digits - (i+1))); 
 
-        // Print het getal dat afgetrokken word en het oude getal
-        printf("Bit-Worth: %-3d ",subtract);
+            // Print het getal dat afgetrokken word en het oude getal
+            printf("Bit-Worth: %-3d ",subtract);
 
-        if (begin_number - subtract  >=  0) {
-            printf("Bit: 1");
-            begin_number = begin_number - subtract; // Trekt alleen de subtract waarde af wanneer het resultaat groter dan of geloijk aan 0 is
-        } else {
-            printf("Bit: 0");
+            
+
+            if (begin_number - subtract  >=  0) {
+                printf("Bit: 1");
+                begin_number = begin_number - subtract; // Trekt alleen de subtract waarde af wanneer het resultaat groter dan of geloijk aan 0 is
+            } else {
+                printf("Bit: 0");
+            }
+            printf(" new: %d\n", begin_number);
         }
-        printf(" new: %d\n", begin_number);
+
+        printf("\n");
     }
-    printf("\n");
+    
 
 }
