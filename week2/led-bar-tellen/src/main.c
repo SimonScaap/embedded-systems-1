@@ -15,8 +15,9 @@ void app_main() {
     gpio_set_level(GPIO_NUM_4, HIGH);
     printf("Set pin 4 to HIGH\n");
 
-    int digits = 4;
-    int count = 15;
+    int digits = 5;
+    int count = 32;
+    int delay_ms = 1000; // Delay tussen het verhogen van de teller
     
     for (size_t x = 0; x < count; x++)
     {
@@ -25,6 +26,7 @@ void app_main() {
         // Zet index i in een nieuwe variabele
         int begin_number = x;
 
+        // For loop voor het displayen van elke bit
         for (size_t i = 0; i < digits; i++)
         {
             // Brekent de grootste macht van 2 die van het begingetal afgetrokken kan worden
@@ -32,8 +34,6 @@ void app_main() {
 
             // Print het getal dat afgetrokken word en het oude getal
             printf("Bit-Worth: %-3d ",subtract);
-
-            
 
             if (begin_number - subtract  >=  0) {
                 printf("Bit: 1");
@@ -44,5 +44,6 @@ void app_main() {
             printf(" new: %d\n", begin_number);
         }
         printf("\n");
+        
     }
 }
