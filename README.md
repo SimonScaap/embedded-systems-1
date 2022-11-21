@@ -1,5 +1,7 @@
 # Embedded Systems 1
 
+![embedded-systems-header](./assets/em1_markdown_header.png)
+
 ## Simon Zweers, IT102
 
 Dit is de git-repository waarin alle projectjes en programma's voor het vak "Embedded Systems 1" in staan. Het vak bestaat uit een praktisch en theoretisch deel. In deze repository word vooral het practisch deel (De projecten en programma's) gedocumenteerd met alle source-code.

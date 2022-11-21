@@ -52,3 +52,9 @@ void app_main() {
         
 } 
 ```
+
+## Project Hartslag
+
+### Een korte beschrijiving van het project
+
+Het doel van het project is om een led te laten blinken in het patroon van een hartslag. Dit is een geavanceerdere versie van het oefenproject "Blinkie"
