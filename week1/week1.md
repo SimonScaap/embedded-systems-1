@@ -1,5 +1,24 @@
 # Week 1
 
+## Notities
+
+CPU: Central Processing Unit. Voert alle instructies in een computer uit. Ook wel CVE (Cetrale VerwerkingsEenheid) genoemd.
+Digitale gegevens:
+
+- Eenvoudig op te slaan. Digitale gegevens kunnen op allerlei manieren zonder verlies opgeslagen worden voor archivering of latere bewerking.
+
+- Complexe bewerkingen zijn mogelijk. Met een combinatie van veel eenvoudige instructies kunnen ingewikkelde bewerkingen op de gegevens worden uitgevoerd.
+
+- Geen effecten van temperatuurdrift of componentveroudering, zoals die in analoge
+technologie een rol speelt. De bewerkingen op digitale gegevens zijn op voorhand te analyseren en geven altijd dezelfde uitkomst.
+
+- Verliesvrij transport over grote afstanden.
+
+ADC (Analo-Digital Converter): Een analoog signaal word omgezet in een digitaal getal.
+![adc_graph](../assets/adc_graph.png)
+
+DAC (Digital-Analog Converter): Een digitaal
+
 ## Oefen Project Blinkie
 
 ### Een korte beschrijving van het project
