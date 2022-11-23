@@ -1,0 +1,11 @@
+# ninja log v5
+12	85	6909368643904215	CMakeFiles/c_opdrachten.dir/vierkant.c.obj	6e0b140f36d3d0ff
+2	73	6909370422104842	c_opdrachten.exe	567b5df8e8271e85
+0	83	6909366474921970	CMakeFiles/c_opdrachten.dir/main.c.obj	be8e0a4b98579250
+1	122	6909371134654708	build.ninja	7908886842a87162
+7	76	6909368643800551	CMakeFiles/c_opdrachten.dir/hello_world.c.obj	dc1267facea23cbf
+2	85	6909368643904215	CMakeFiles/c_opdrachten.dir/mario.c.obj	8a11a205f07cc56b
+1	67	6909371184977593	CMakeFiles/c_opdrachten.dir/mario.c.obj	8a11a205f07cc56b
+1	68	6909372787707567	CMakeFiles/c_opdrachten.dir/mario.c.obj	8a11a205f07cc56b
+68	147	6909372788453574	c_opdrachten.exe	7b72826e28e5c2e2
+3	78	6909372948085804	CMakeFiles/c_opdrachten.dir/mario.c.obj	8a11a205f07cc56b

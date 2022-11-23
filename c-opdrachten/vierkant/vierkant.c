@@ -1,9 +1,10 @@
-#include <stdio.h>
-
-int width = 15;
-int height = 7;
+#include "stdio.h"
+//#include "stdlib.h"
 
 int main() {
+    int width = 6;
+    int height= 10;
+
     printf("width: %d\n", width);
     printf("height: %d\n", height);
     for (int i = 0; i < height; ++i) {

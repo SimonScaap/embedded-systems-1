@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "c_opdrachten.exe"
+			"path" : "vierkant.exe"
 		},
 		{
-			"path" : "c_opdrachten.pdb"
+			"path" : "vierkant.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -59,7 +59,7 @@
 			]
 		}
 	],
-	"id" : "c_opdrachten::@6890427a1f51a3e7e1df",
+	"id" : "vierkant::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -79,8 +79,8 @@
 		],
 		"language" : "C"
 	},
-	"name" : "c_opdrachten",
-	"nameOnDisk" : "c_opdrachten.exe",
+	"name" : "vierkant",
+	"nameOnDisk" : "vierkant.exe",
 	"paths" : 
 	{
 		"build" : ".",
@@ -101,7 +101,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main.c",
+			"path" : "vierkant.c",
 			"sourceGroupIndex" : 0
 		}
 	],

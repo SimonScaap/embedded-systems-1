@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: c_opdrachten
+# Project: mario
 # Configurations: Debug
 # =============================================================================
 
@@ -39,52 +39,46 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/em1-zweerss/c-opdrachten/cmake-build-debug/
+cmake_ninja_workdir = C$:/em1-zweerss/c-opdrachten/mario/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target c_opdrachten
+# Object build statements for EXECUTABLE target mario
 
 
 #############################################
-# Order-only phony target for c_opdrachten
+# Order-only phony target for mario
 
-build cmake_object_order_depends_target_c_opdrachten: phony || CMakeFiles/c_opdrachten.dir
+build cmake_object_order_depends_target_mario: phony || CMakeFiles/mario.dir
 
-build CMakeFiles/c_opdrachten.dir/vierkant.c.obj: C_COMPILER__c_opdrachten_Debug C$:/em1-zweerss/c-opdrachten/vierkant.c || cmake_object_order_depends_target_c_opdrachten
-  DEP_FILE = CMakeFiles\c_opdrachten.dir\vierkant.c.obj.d
+build CMakeFiles/mario.dir/mario.c.obj: C_COMPILER__mario_Debug C$:/em1-zweerss/c-opdrachten/mario/mario.c || cmake_object_order_depends_target_mario
+  DEP_FILE = CMakeFiles\mario.dir\mario.c.obj.d
   FLAGS = -g -std=gnu99
-  OBJECT_DIR = CMakeFiles\c_opdrachten.dir
-  OBJECT_FILE_DIR = CMakeFiles\c_opdrachten.dir
-
-build CMakeFiles/c_opdrachten.dir/mario.c.obj: C_COMPILER__c_opdrachten_Debug C$:/em1-zweerss/c-opdrachten/mario.c || cmake_object_order_depends_target_c_opdrachten
-  DEP_FILE = CMakeFiles\c_opdrachten.dir\mario.c.obj.d
-  FLAGS = -g -std=gnu99
-  OBJECT_DIR = CMakeFiles\c_opdrachten.dir
-  OBJECT_FILE_DIR = CMakeFiles\c_opdrachten.dir
+  OBJECT_DIR = CMakeFiles\mario.dir
+  OBJECT_FILE_DIR = CMakeFiles\mario.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target c_opdrachten
+# Link build statements for EXECUTABLE target mario
 
 
 #############################################
-# Link the executable c_opdrachten.exe
+# Link the executable mario.exe
 
-build c_opdrachten.exe: C_EXECUTABLE_LINKER__c_opdrachten_Debug CMakeFiles/c_opdrachten.dir/vierkant.c.obj CMakeFiles/c_opdrachten.dir/mario.c.obj
+build mario.exe: C_EXECUTABLE_LINKER__mario_Debug CMakeFiles/mario.dir/mario.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\c_opdrachten.dir
+  OBJECT_DIR = CMakeFiles\mario.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = c_opdrachten.exe
-  TARGET_IMPLIB = libc_opdrachten.dll.a
-  TARGET_PDB = c_opdrachten.exe.dbg
+  TARGET_FILE = mario.exe
+  TARGET_IMPLIB = libmario.dll.a
+  TARGET_PDB = mario.exe.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\mario\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -95,7 +89,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\em1-zweerss\c-opdrachten -BC:\em1-zweerss\c-opdrachten\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\mario\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\em1-zweerss\c-opdrachten\mario -BC:\em1-zweerss\c-opdrachten\mario\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -105,7 +99,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build c_opdrachten: phony c_opdrachten.exe
+build mario: phony mario.exe
 
 # =============================================================================
 # Folder targets.
@@ -113,9 +107,9 @@ build c_opdrachten: phony c_opdrachten.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/em1-zweerss/c-opdrachten/cmake-build-debug
+# Folder: C:/em1-zweerss/c-opdrachten/mario/cmake-build-debug
 
-build all: phony c_opdrachten.exe
+build all: phony mario.exe
 
 # =============================================================================
 # Built-in targets

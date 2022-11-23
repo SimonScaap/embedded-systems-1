@@ -3,4 +3,4 @@ project(c_opdrachten C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(c_opdrachten main.c)
+add_executable(c_opdrachten vierkant.c mario.c)

@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: c_opdrachten
+# Project: vierkant
 # Configurations: Debug
 # =============================================================================
 
@@ -39,52 +39,46 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/em1-zweerss/c-opdrachten/cmake-build-debug/
+cmake_ninja_workdir = C$:/em1-zweerss/c-opdrachten/vierkant/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target c_opdrachten
+# Object build statements for EXECUTABLE target vierkant
 
 
 #############################################
-# Order-only phony target for c_opdrachten
+# Order-only phony target for vierkant
 
-build cmake_object_order_depends_target_c_opdrachten: phony || CMakeFiles/c_opdrachten.dir
+build cmake_object_order_depends_target_vierkant: phony || CMakeFiles/vierkant.dir
 
-build CMakeFiles/c_opdrachten.dir/vierkant.c.obj: C_COMPILER__c_opdrachten_Debug C$:/em1-zweerss/c-opdrachten/vierkant.c || cmake_object_order_depends_target_c_opdrachten
-  DEP_FILE = CMakeFiles\c_opdrachten.dir\vierkant.c.obj.d
+build CMakeFiles/vierkant.dir/vierkant.c.obj: C_COMPILER__vierkant_Debug C$:/em1-zweerss/c-opdrachten/vierkant/vierkant.c || cmake_object_order_depends_target_vierkant
+  DEP_FILE = CMakeFiles\vierkant.dir\vierkant.c.obj.d
   FLAGS = -g -std=gnu99
-  OBJECT_DIR = CMakeFiles\c_opdrachten.dir
-  OBJECT_FILE_DIR = CMakeFiles\c_opdrachten.dir
-
-build CMakeFiles/c_opdrachten.dir/mario.c.obj: C_COMPILER__c_opdrachten_Debug C$:/em1-zweerss/c-opdrachten/mario.c || cmake_object_order_depends_target_c_opdrachten
-  DEP_FILE = CMakeFiles\c_opdrachten.dir\mario.c.obj.d
-  FLAGS = -g -std=gnu99
-  OBJECT_DIR = CMakeFiles\c_opdrachten.dir
-  OBJECT_FILE_DIR = CMakeFiles\c_opdrachten.dir
+  OBJECT_DIR = CMakeFiles\vierkant.dir
+  OBJECT_FILE_DIR = CMakeFiles\vierkant.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target c_opdrachten
+# Link build statements for EXECUTABLE target vierkant
 
 
 #############################################
-# Link the executable c_opdrachten.exe
+# Link the executable vierkant.exe
 
-build c_opdrachten.exe: C_EXECUTABLE_LINKER__c_opdrachten_Debug CMakeFiles/c_opdrachten.dir/vierkant.c.obj CMakeFiles/c_opdrachten.dir/mario.c.obj
+build vierkant.exe: C_EXECUTABLE_LINKER__vierkant_Debug CMakeFiles/vierkant.dir/vierkant.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\c_opdrachten.dir
+  OBJECT_DIR = CMakeFiles\vierkant.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = c_opdrachten.exe
-  TARGET_IMPLIB = libc_opdrachten.dll.a
-  TARGET_PDB = c_opdrachten.exe.dbg
+  TARGET_FILE = vierkant.exe
+  TARGET_IMPLIB = libvierkant.dll.a
+  TARGET_PDB = vierkant.exe.dbg
 
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\vierkant\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -95,7 +89,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\em1-zweerss\c-opdrachten -BC:\em1-zweerss\c-opdrachten\cmake-build-debug"
+  COMMAND = cmd.exe /C "cd /D C:\em1-zweerss\c-opdrachten\vierkant\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2022.2.4\bin\cmake\win\bin\cmake.exe" --regenerate-during-build -SC:\em1-zweerss\c-opdrachten\vierkant -BC:\em1-zweerss\c-opdrachten\vierkant\cmake-build-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -105,7 +99,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Target aliases.
 
-build c_opdrachten: phony c_opdrachten.exe
+build vierkant: phony vierkant.exe
 
 # =============================================================================
 # Folder targets.
@@ -113,9 +107,9 @@ build c_opdrachten: phony c_opdrachten.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/em1-zweerss/c-opdrachten/cmake-build-debug
+# Folder: C:/em1-zweerss/c-opdrachten/vierkant/cmake-build-debug
 
-build all: phony c_opdrachten.exe
+build all: phony vierkant.exe
 
 # =============================================================================
 # Built-in targets
