@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="32093c8e-a8d5-4c8b-8174-b6b183c80df5" name="oege server">
+        <fileTransfer rootFolder="/home/ivi/zweerss" accessType="SFTP" host="oege.ie.hva.nl" port="22" sshConfigId="10ad4f7b-f4e0-4ce9-8435-c2f4ffa89071" sshConfig="zweerss@oege.ie.hva.nl:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
