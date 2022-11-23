@@ -5,14 +5,14 @@
       <paths name="Remote Host (daec5bb1-9393-4f8c-937a-6fa2fe51b8ff)">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$/c-opdrachten" web="/" />
           </mappings>
         </serverdata>
       </paths>
       <paths name="oege server">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$/c-opdrachten" web="/" />
           </mappings>
         </serverdata>
       </paths>

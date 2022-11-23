@@ -13,10 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9fe07b1d-5c13-4868-8a91-348367093185" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/week1/hello_world.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week2/mario.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/week2/vierkant.c" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +49,7 @@
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/em1-zweerss",
+    "last_opened_file_path": "C:/em1-zweerss/c-opdrachten",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,6 +57,13 @@
     "settings.editor.selected.configurable": "CPPToolchains"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\em1-zweerss\c-opdrachten" />
+      <recent name="C:\em1-zweerss\week2" />
+      <recent name="C:\em1-zweerss\week1" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -69,7 +74,7 @@
       <updated>1668990294129</updated>
       <workItem from="1668990297759" duration="3131000" />
       <workItem from="1669032781124" duration="993000" />
-      <workItem from="1669230670637" duration="1085000" />
+      <workItem from="1669230670637" duration="1822000" />
     </task>
     <servers />
   </component>
