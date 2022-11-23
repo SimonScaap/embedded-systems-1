@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" serverName="oege server" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+      <paths name="Remote Host (daec5bb1-9393-4f8c-937a-6fa2fe51b8ff)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="oege server">
         <serverdata>
           <mappings>
