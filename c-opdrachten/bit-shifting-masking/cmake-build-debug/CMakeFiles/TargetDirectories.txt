@@ -1,3 +1,0 @@
-C:/em1-zweerss/c-opdrachten/bit-shifting-masking/cmake-build-debug/CMakeFiles/bit_shifting_masking.dir
-C:/em1-zweerss/c-opdrachten/bit-shifting-masking/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/em1-zweerss/c-opdrachten/bit-shifting-masking/cmake-build-debug/CMakeFiles/rebuild_cache.dir

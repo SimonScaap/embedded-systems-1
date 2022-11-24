@@ -1,13 +1,18 @@
 #include <stdio.h>
 
 int bit_check(int position, int number) {
-    // TODO: Maak af
-    return 0;
+    // Bit shift positie
+    if (((1<<position) & number) != 0) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int bit_set(int position, int value, int number) {
-    // TODO: Maak af
-    return 0;
+    // als bit van position hetzelfde is als bit van value dan zelfde
+    // als bit van position anders is als bit van value dan anders
+    
 }
 
 int main() {
