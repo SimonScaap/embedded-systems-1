@@ -8,7 +8,7 @@ Dit programma laat een led blinken in het patroon van een hartslag
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define LED_PIN 16
+#define LED_PIN 21
 #define HIGH 1
 #define LOW 0
 
