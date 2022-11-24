@@ -7,7 +7,7 @@
 #define HIGH 1
 #define LOW 0
 
-#define DIGITS = 5
+#define DIGITS 10
 
 //#define LED_PINS_ARR[5] 
 
@@ -19,7 +19,7 @@ void app_main() {
         gpio_set_direction(led_pins_arr[y], GPIO_MODE_OUTPUT);
     }
     
-    int count = 32;
+    int count = 1024;
     int delay_ms = 1000; // Delay tussen het verhogen van de teller
     while (true)
     {
@@ -27,31 +27,24 @@ void app_main() {
         {
             printf("Begingetal: %d\n", x); // print begin nummer
 
-            // Zet index i in een nieuwe variabele
-            int begin_number = x;
-
             // For loop voor het displayen van elke bit
-            for (size_t i = 0; i < 5; i++)
+            for (size_t i = 0; i < DIGITS; i++)
             {
-                // Brekent de grootste macht van 2 die van het begingetal afgetrokken kan worden
-                int subtract = pow(2,(5 - (i+1))); 
-
-                // Print het getal dat afgetrokken word en het oude getal
-                printf("Bit-Worth: %-3d ",subtract);
-
-                if (begin_number - subtract  >=  0) {
-                    printf("Bit: 1");
-                    begin_number = begin_number - subtract; // Trekt alleen de subtract waarde af wanneer het resultaat groter dan of geloijk aan 0 is
+                if (((1 << i) & x) !=0 ) {
+                    printf("1");
                     gpio_set_level(led_pins_arr[i], HIGH); // Zet een led op HIGH als de bit 1 is
                 } else {
-                    printf("Bit: 0");
-                    gpio_set_level(led_pins_arr[i], LOW);
+                    printf("0");
+                    gpio_set_level(led_pins_arr[i], LOW); // Zet een led op LOW als de bit 0 is
                 }
-                printf(" new: %d\n", begin_number);
             }
             printf("\n");
             vTaskDelay(delay_ms / portTICK_PERIOD_MS);
         }
     }
+}
+
+// Functie voor het checken van elke bit
+void checkDigits () {
     
 }
