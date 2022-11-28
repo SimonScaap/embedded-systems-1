@@ -14,6 +14,29 @@
 
 //#define LED_PINS_ARR[5] 
 
+// Functie voor het checken van elke bit (nummer om te checken)
+int checkDigits (int numberToCheck, int index) {
+    if (((1 << index) & numberToCheck) !=0 ) {
+        return 1;
+    } else {
+        return 0;
+    }    
+}
+
+// Functie voor het aan-uit zetten van alle leds
+void setLedValues (int numberToConvert, int numOfDigits, int ledPinsArr[]) {
+    for (size_t i = 0; i < numOfDigits; i++)
+    {
+        if (checkDigits(numberToConvert, i)) {
+            printf("1");
+            gpio_set_level(ledPinsArr[i], HIGH); // Zet een led op HIGH als de bit 1 is
+        } else {
+            printf("0");
+            gpio_set_level(ledPinsArr[i], LOW); // Zet een led op LOW als de bit 0 is
+        }
+    }
+}
+
 void app_main() {
     printf("Setting up\n");
     int led_pins_arr[DIGITS] = {GPIO_NUM_4, GPIO_NUM_5, GPIO_NUM_6, GPIO_NUM_7, GPIO_NUM_15, GPIO_NUM_16, GPIO_NUM_17, GPIO_NUM_18, GPIO_NUM_8, GPIO_NUM_3};
@@ -30,29 +53,10 @@ void app_main() {
             printf("Begingetal: %d\n", x); // print begin nummer
 
             // For loop voor het displayen van elke bit
-            for (size_t i = 0; i < DIGITS; i++)
-            {
-                if (((1 << i) & x) !=0 ) {
-                    printf("1");
-                    gpio_set_level(led_pins_arr[i], HIGH); // Zet een led op HIGH als de bit 1 is
-                } else {
-                    printf("0");
-                    gpio_set_level(led_pins_arr[i], LOW); // Zet een led op LOW als de bit 0 is
-                }
-            }
+            setLedValues(x, DIGITS, led_pins_arr);
             printf("\n");
             vTaskDelay(DELAY_MS / portTICK_PERIOD_MS);
         }
     }
 }
 
-// Functie voor het checken van elke bit
-int checkDigits (int numberToCheck, int index) {
-    if (((1 << index) & numberToCheck) !=0 ) {
-        return 1;
-    } else {
-        return 0;
-    }    
-    
-    
-}
