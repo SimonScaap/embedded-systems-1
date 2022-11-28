@@ -12,8 +12,6 @@
 // Delay voor de counter
 #define DELAY_MS 1000
 
-//#define LED_PINS_ARR[5] 
-
 // Functie voor het checken van elke bit (nummer om te checken)
 int checkDigits (int numberToCheck, int index) {
     if (((1 << index) & numberToCheck) !=0 ) {
