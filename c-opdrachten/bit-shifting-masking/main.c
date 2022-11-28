@@ -12,7 +12,7 @@ int bit_check(int position, int number) {
 int bit_set(int position, int value, int number) {
     // als bit van position hetzelfde is als bit van value dan zelfde
     // als bit van position anders is als bit van value dan anders
-    
+
 }
 
 int main() {
