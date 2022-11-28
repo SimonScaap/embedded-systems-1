@@ -2,6 +2,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "soc/soc.h"
+#include "esp_intr_alloc.h"
 
 #define HIGH 1
 #define LOW 0
@@ -10,30 +11,37 @@
 
 int count = 0;
 
+int ioLowerButton = 0;
+int ioLowerButtonCallback = 0;
+
 void addToCount() {
     count += 1;
     printf("Added To count\n");
+    printf("Current Count: %d\n", count);
 }
 void subtractFromCount() {
     count -= 1;
     printf("Subtracted From count\n");
+    printf("Current Count: %d\n", count);
+
 }
 
 void app_main() {
     // Setup
     gpio_set_direction(LOWER_BUTTON, GPIO_MODE_INPUT);
     gpio_set_direction(HIGHER_BUTTON, GPIO_MODE_INPUT);
-
-    gpio_intr_enable(HIGHER_BUTTON);
-    gpio_set_intr_type(HIGHER_BUTTON, GPIO_INTR_POSEDGE);
-    //gpio_isr_register(addToCount, void, ESP_INTR_FLAG_LEVEL1,NULL);
-
-    for (size_t i = 0; i < 4; i++)
+    while (true)
     {
-        addToCount();
-        printf("Hello World!\n");
-        printf("Blink\n");
-        printf("index: %d \t count: %d\n", i, count);
+        ioLowerButton = gpio_get_level(LOWER_BUTTON);
+        if (ioLowerButton > ioLowerButtonCallback)
+        {
+            subtractFromCount();
+        }
+        
+        
+        vTaskDelay(2 / portTICK_PERIOD_MS);
+        ioLowerButtonCallback = ioLowerButton;
+
     }
     
 }
