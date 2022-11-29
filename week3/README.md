@@ -29,3 +29,21 @@ BCD (Binary Coded Decimal) code word gebruikt om deciamle getallen 0-9 op te sla
 
 Standaard ASCII (American Standard Code for Information Interchange) word gebruikt om dataoverdracht in tekstvorm tussen computers de standaardiseren. De eerste 32 bits (0-31) zijn functiecodes. Deze verschijnen niet op het scherm, maar zijn functies zoals Backspace of Line Feed (Nieuwe regel).
 ![ascii.png](../assets/ascii.png)
+
+### ISO 8859
+
+Karaktersetstandaarden
+
+### Elementaire logische poorten
+
+### Samengestelde logische poorten
+
+Hoe maak je een EXOR logic gate?
+
+### Don't care condities
+
+Hoe weet je of iets een don't care conditie is?
+
+### Propogation delay
+
+Propagation delay is de vertraging tussen het ingangsignaal ten opzichte van het uigangsignaal.
