@@ -1,47 +1,57 @@
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "soc/soc.h"
-#include "esp_intr_alloc.h"
+#include <stdio.h>
 
 #define HIGH 1
 #define LOW 0
-#define LOWER_BUTTON 4
-#define HIGHER_BUTTON 5
-
-int count = 0;
-
-int ioLowerButton = 0;
-int ioLowerButtonCallback = 0;
-
-void addToCount() {
-    count += 1;
-    printf("Added To count\n");
-    printf("Current Count: %d\n", count);
-}
-void subtractFromCount() {
-    count -= 1;
-    printf("Subtracted From count\n");
-    printf("Current Count: %d\n", count);
-
-}
+#define LOWER_BUTTON 5
+#define HIGHER_BUTTON 4
+#define CALLBACK_DELAY 10
 
 void app_main() {
     // Setup
     gpio_set_direction(LOWER_BUTTON, GPIO_MODE_INPUT);
     gpio_set_direction(HIGHER_BUTTON, GPIO_MODE_INPUT);
+    int getLevelLower = 0;
+    int lowerCallback = 0;
+    int getLevelHigher = 0;
+    bool higherCallback = 0;
+    int count = 0;
+
     while (true)
     {
-        ioLowerButton = gpio_get_level(LOWER_BUTTON);
-        if (ioLowerButton > ioLowerButtonCallback)
+        // Read State Of Both Buttons
+        getLevelLower = gpio_get_level(LOWER_BUTTON);
+        getLevelHigher = gpio_get_level(HIGHER_BUTTON);
+        
+        // Compare buttons to previous value
+        if (getLevelLower > lowerCallback)
         {
-            subtractFromCount();
+            count++;
+            
+        }
+        if (getLevelHigher > higherCallback)
+        {
+            count--;
         }
         
-        
-        vTaskDelay(2 / portTICK_PERIOD_MS);
-        ioLowerButtonCallback = ioLowerButton;
+        // Als count < 0 dan word het op 0 gezet
+        if (count < 0)
+        {
+            count = 0;
+        }
+
+        // Print Button State
+        printf("Hello World!  ");
+        printf("Knopje: %d  %d | count: %d\n", getLevelLower, getLevelHigher, count);
+        vTaskDelay(CALLBACK_DELAY / portTICK_PERIOD_MS);
+
+        // Set callback
+        lowerCallback = getLevelLower;
+        higherCallback = getLevelHigher;
 
     }
+    
     
 }
