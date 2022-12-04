@@ -49,3 +49,16 @@ Hoe weet je of iets een don't care conditie is?
 Propagation delay is de vertraging tussen het ingangsignaal ten opzichte van het uigangsignaal.
 
 ### Fan-in, Fan-out en Standaarbelasting
+
+## Verkeerslicht
+
+### Schematisch en fysiek
+
+![schematisch](../assets/verkeerslicht/verkeerslicht_bb.png)
+![fysiek](../assets/verkeerslicht/verkeerslicht_physical.jpg)
+
+## PWM Verkeerslicht
+
+### SChematisch en fysiek
+
+Dit project gebuikt dezelfde aansluiting als [verkeerslicht](#schematisch-en-fysiek)
