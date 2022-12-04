@@ -47,3 +47,5 @@ Hoe weet je of iets een don't care conditie is?
 ### Propogation delay
 
 Propagation delay is de vertraging tussen het ingangsignaal ten opzichte van het uigangsignaal.
+
+### Fan-in, Fan-out en Standaarbelasting
