@@ -40,15 +40,15 @@ void traffic_light_cycle() {
     // GREEN
     vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
     set_one_to_high(GREEN, LED_PINS_ARR, ARRAY_LENGTH);
-    printf("turned on GREEN");
+    printf("turned on GREEN\n");
     vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
     // YELLOW
     set_one_to_high(YELLOW, LED_PINS_ARR, ARRAY_LENGTH);
-    printf("turned on YELLOW");
+    printf("turned on YELLOW\n");
     vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
     // RED
     set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
-    printf("turned on RED");
+    printf("turned on RED\n");
 }
 
 void app_main() {
@@ -59,17 +59,33 @@ void app_main() {
     gpio_set_direction(BUTTON_INPUT, GPIO_MODE_INPUT);
     int buttonValue = 0;
     int buttonValueCallback = 0;
+    int tempCount = 0;
 
     bool breakLoop = false;
     while (true)
     {
-        buttonValue = gpio_get_level(BUTTON_INPUT);
-        if (buttonValue > buttonValueCallback)
+        set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
+        while (!breakLoop)
         {
-            printf("Button Pressed");
+            
+            buttonValue = gpio_get_level(BUTTON_INPUT);
+            if (buttonValue > buttonValueCallback)
+            {
+                tempCount += 1;
+                printf("Button Pressed! : %d\n", tempCount);
+                breakLoop = true;
+            }
+            buttonValueCallback = buttonValue;
+            
+            vTaskDelay(10/ portTICK_PERIOD_MS);
             
         }
-        buttonValueCallback = buttonValue;
+        
+        
+        printf("ButtonDelay\n");
+        vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
+        traffic_light_cycle();
+        breakLoop = false;
     }
     
 }
