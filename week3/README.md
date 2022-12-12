@@ -50,6 +50,8 @@ Propagation delay is de vertraging tussen het ingangsignaal ten opzichte van het
 
 ### Fan-in, Fan-out en Standaarbelasting
 
+### CRC
+
 ## Verkeerslicht
 
 ### Schematisch en fysiek
