@@ -99,15 +99,15 @@ void app_main() {
     //gpio_set_direction(YELLOW, GPIO_MODE_OUTPUT);
     gpio_set_direction(RED, GPIO_MODE_OUTPUT);
     gpio_set_direction(BUTTON_INPUT, GPIO_MODE_INPUT);
-    
+    ledc_fade_func_install(0);
     /*
     int buttonValue = 0;
     int buttonValueCallback = 0;
     int tempCount = 0;
     
     */
-
-    bool breakLoop = false;
+    int minDuty = 0;
+    int maxDuty = 8191;
     while (true)
     {
         // set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
@@ -126,19 +126,14 @@ void app_main() {
         //     vTaskDelay(10/ portTICK_PERIOD_MS);
             
         // }
-        for (size_t i = 0; i < 5; i++)
-        {
-            ledc_set_duty(LEDC_MODE, LEDC_CHANNEL, (i * 2000));
-            printf("Setting duty cycle to: %d\n", (i *2000));
-            ledc_update_duty(LEDC_MODE, LEDC_CHANNEL);
-            printf("Updating duty cycle\n");
-            
-            vTaskDelay(500 / portTICK_PERIOD_MS);
-        }
-        
-        
-        
-        breakLoop = false;
+        ledc_set_fade_with_time(LEDC_MODE, LEDC_CHANNEL, maxDuty, 500);
+        printf("Set fade to maxDuty\n");
+        ledc_fade_start(LEDC_MODE, LEDC_CHANNEL, LEDC_FADE_WAIT_DONE );
+        printf("Start fade to maxDuty\n");
 
+        ledc_set_fade_with_time(LEDC_MODE, LEDC_CHANNEL, minDuty, 500);
+        printf("Set fade to minDuty\n");
+        ledc_fade_start(LEDC_MODE, LEDC_CHANNEL, LEDC_FADE_WAIT_DONE );
+        printf("Start fade to minDuty\n");
     }
 }
