@@ -6,6 +6,7 @@
 #define HIGH 1
 #define LOW 0
 #define POTENTIOMETER ADC1_CHANNEL_3 // GPIO 4
+#define ARRAY_SIZE 10
 
 int checkDigits (int numberToCheck, int index) {
     if (((1 << index) & numberToCheck) !=0 ) {
@@ -32,7 +33,7 @@ void setLedValues (int numberToConvert, int numOfDigits, int ledPinsArr[]) {
 int ledPinsArray[] = {5, 6, 7, 15, 16, 17, 18, 8, 3, 46};
 
 void app_main() {
-    for (size_t i = 0; i < 10; i++)
+    for (size_t i = 0; i < ARRAY_SIZE; i++)
     {
         gpio_set_direction(ledPinsArray[i], GPIO_MODE_OUTPUT);
     }
@@ -53,21 +54,21 @@ void app_main() {
     */
     while (true)
     {
-        for (size_t i = 0; i < 9; i++)
+        for (size_t i = 0; i < (ARRAY_SIZE - 1); i++)
         {
             adc1Read = adc1_get_raw(POTENTIOMETER);
 
-            setLedValues(ledOnValue, 10, ledPinsArray);
+            setLedValues(ledOnValue, ARRAY_SIZE, ledPinsArray);
             printf("Index %d \n", ledOnValue);
             ledOnValue = ledOnValue + 1;
 
             vTaskDelay((adc1Read / 10) / portTICK_PERIOD_MS);
         }
-        for (size_t i = 0; i < 9; i++)
+        for (size_t i = 0; i < (ARRAY_SIZE - 1); i++)
         {
             adc1Read = adc1_get_raw(POTENTIOMETER);
             
-            setLedValues(ledOnValue, 10, ledPinsArray);
+            setLedValues(ledOnValue, ARRAY_SIZE, ledPinsArray);
             printf("Index %d \n", ledOnValue);
             ledOnValue = ledOnValue - 1;
 
