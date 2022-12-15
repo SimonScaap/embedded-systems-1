@@ -30,9 +30,9 @@ void setLedValues (int numberToConvert, int numOfDigits, int ledPinsArr[]) {
     }
 }
 
-int ledPinsArray[] = {5, 6, 7, 15, 16, 17, 18, 8, 3, 46};
 
 void app_main() {
+    int ledPinsArray[] = {5, 6, 7, 15, 16, 17, 18, 8, 3, 46};
     for (size_t i = 0; i < ARRAY_SIZE; i++)
     {
         gpio_set_direction(ledPinsArray[i], GPIO_MODE_OUTPUT);
