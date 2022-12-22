@@ -1,3 +1,9 @@
+/*
+Dit programma stuurt een led bar zodat het lijkt op de verlichting van light rider
+@author Simon Zweers
+@date 12 12 2022
+*/
+
 #include "driver/gpio.h"
 #include "driver/adc.h"
 #include "freertos/FreeRTOS.h"

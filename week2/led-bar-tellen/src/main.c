@@ -1,3 +1,9 @@
+/*
+Dit programma geeft een Binair getal weer op een ledbar
+@author Simon Zweers
+@date 21 11 2022
+*/
+
 #include <stdio.h>
 #include <math.h>
 #include <driver/gpio.h>

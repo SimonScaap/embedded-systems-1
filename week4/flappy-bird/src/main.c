@@ -1,3 +1,9 @@
+/*
+Met dit programma kun je het flappy bird spel op de DLO spelen. Als je op de knop drukt, dat word het commando ">" verstuurd.
+@author Simon Zweers
+@date 12 12 2022
+*/
+
 #include <stdio.h>
 #include <driver/gpio.h>
 #include <freertos/FreeRTOS.h>

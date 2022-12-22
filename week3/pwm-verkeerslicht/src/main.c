@@ -1,3 +1,8 @@
+/*
+Dit programma zorgt ervoor dat een led aan en uit fade door middel van pwm
+@author Simon Zweers
+@date 04 12 2022
+*/
 #include <driver/gpio.h>
 #include <driver/ledc.h>
 #include <freertos/FreeRTOS.h>

@@ -1,3 +1,9 @@
+/*
+Dit programma houdt bij hoeveel drankjes je op hebt en geeft het getal weer op een led bar
+@author Simon Zweers
+@date 28 11 2022
+*/
+
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"

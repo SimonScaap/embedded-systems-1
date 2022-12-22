@@ -1,3 +1,9 @@
+/*
+Dit programma print de waarde van een LDR in de console d.m.v. ADC
+@author Simon Zweers
+@date 12 12 2022
+*/
+
 #include <driver/gpio.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>

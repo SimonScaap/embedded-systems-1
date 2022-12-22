@@ -1,3 +1,8 @@
+/*
+Dit programma Stuurt een stoplicht aan, zodat als je op een knop drukt, het stoplicht na een tijd op groen gaat.
+@author Simon Zweers
+@date 02 12 2022
+*/
 #include <driver/gpio.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
