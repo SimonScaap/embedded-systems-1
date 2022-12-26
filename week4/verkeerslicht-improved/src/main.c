@@ -72,8 +72,7 @@ void app_main() {
     while (1) {
         // Read data from the UART
         int len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 20 / portTICK_PERIOD_MS);
-
-        
+    
         if (len) {
             data[len] = '\0';
             printf("> %s\n", data);
@@ -93,7 +92,25 @@ void app_main() {
                 break;
             case 'A':
                 printf("command: A\n");
-                break;
+                len = 0;
+                gpio_set_level(RED, LOW);
+                gpio_set_level(GREEN, LOW);
+                while (true)
+                {
+                    printf("Setting HIGH\n");
+                    gpio_set_level(YELLOW, HIGH);
+                    vTaskDelay(500 / portTICK_PERIOD_MS);
+                    printf("Setting LOW\n"); 
+                    gpio_set_level(YELLOW, LOW);
+                    vTaskDelay(500 / portTICK_PERIOD_MS);
+                    printf("Checnking UART for input... \n");
+                    len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 10 / portTICK_PERIOD_MS);
+                    if (len != 0)
+                    {
+                        break;
+                    }
+                    
+                }
 
             default:
                 break;
