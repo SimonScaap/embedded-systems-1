@@ -50,12 +50,10 @@ void set_one_to_high(int pinToSet, int ledPinsArray[], int arrayLength) {
 void blink_orange_led(void *p) {
     //configASSERT(((uint32_t)p) == 1);
     set_one_to_high(YELLOW, LED_PINS_ARR, ARRAY_LENGTH);
-    while (true)
-    {
-        
+    while (true) {
         gpio_set_level(YELLOW, HIGH);
         vTaskDelay(750 / portTICK_PERIOD_MS);
-        gpio_set_level(YELLOW, HIGH);
+        gpio_set_level(YELLOW, LOW);
         vTaskDelay(750 / portTICK_PERIOD_MS);
     }
 }
@@ -82,53 +80,54 @@ void app_main() {
     // databuffer aanmaken
     uint8_t *data = (uint8_t *) malloc(BUF_SIZE);
 
-    // TASK handles
+    // TASK handle
     TaskHandle_t xHandle1 = NULL;
-    
-    while (1) {
-        // Read data from the UART
-        int len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 20 / portTICK_PERIOD_MS);
-    
-        if (len) {
-            data[len] = '\0';
-            printf("> %s\n", data);
-
-            switch (data[0]) {
-            case '1':
-                printf("command: 1\n");
-                set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
-                break;
-            case '2':
-                printf("command: 2\n");
-                set_one_to_high(YELLOW, LED_PINS_ARR, ARRAY_LENGTH);
-                break;
-            case '3':
-                printf("command: 3\n");
-                set_one_to_high(GREEN, LED_PINS_ARR, ARRAY_LENGTH);
-                break;
-            case 'A':
-                xTaskCreate(
-                    blink_orange_led,
-                    "Name1",
-                    5000,
-                    NULL,
-                    tskIDLE_PRIORITY,
-                    xHandle1
-                );
-                break;
-
-            default:
-                break;
-            }
-        }
-    }
-    
+    // Task aanmaken
     xTaskCreate(
         blink_orange_led,
         "Name1",
         5000,
         NULL,
         tskIDLE_PRIORITY,
-        xHandle1
-    );
+        &xHandle1
+        );
+    printf("xHandle1: %d\n", (int)xHandle1); // print de handle van blink_orange_led()
+    printf("\n");
+    
+
+    while (1) {
+        // Read data from the UART
+        int len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 20 / portTICK_PERIOD_MS);
+
+        if (len) {
+            data[len] = '\0';
+            printf("> %s\n", data);
+
+            // Switch statement voor het handlen van alle commando's
+            switch (data[0]) {
+                case '1': // Doet alleen de Rode led aan
+                    printf("command: 1\n");
+                    set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
+                    vTaskSuspend(xHandle1);
+                    break;
+                case '2': // Doet alleen de Gele led aan
+                    printf("command: 2\n");
+                    vTaskSuspend(xHandle1);
+                    set_one_to_high(YELLOW, LED_PINS_ARR, ARRAY_LENGTH);
+                    break;
+                case '3': // Doet alleen de Groene led aan
+                    printf("command: 3\n");
+                    vTaskSuspend(xHandle1);
+                    set_one_to_high(GREEN, LED_PINS_ARR, ARRAY_LENGTH);
+                    break;
+                case 'A': // Zet Groen en Rood uit en knippert de Gele led 
+                    gpio_set_level(RED, LOW);
+                    gpio_set_level(GREEN, LOW);
+                    vTaskResume(xHandle1);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
