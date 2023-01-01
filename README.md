@@ -6,6 +6,14 @@
 
 Dit is de git-repository waarin alle projectjes en programma's voor het vak "Embedded Systems 1" in staan. Het vak bestaat uit een praktisch en theoretisch deel. In deze repository word vooral het practisch deel (De projecten en programma's) gedocumenteerd met alle source-code.
 
+- [Week 1](/week1/)
+- [Week 2](/week2/)
+- [Week 3](/week3/)
+- [Week 4](/week4/)
+- [Week 5](/week5/)
+- [Eindopdracht](/week6/)
+
+
 ### De embedded kit
 
 We kopen allemaal een "Embedded Kit" die door docenten van de HvA samengesteld is.
