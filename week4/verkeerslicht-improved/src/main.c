@@ -47,6 +47,19 @@ void set_one_to_high(int pinToSet, int ledPinsArray[], int arrayLength) {
     printf("\n");
 }
 
+void blink_orange_led(void *p) {
+    //configASSERT(((uint32_t)p) == 1);
+    set_one_to_high(YELLOW, LED_PINS_ARR, ARRAY_LENGTH);
+    while (true)
+    {
+        
+        gpio_set_level(YELLOW, HIGH);
+        vTaskDelay(750 / portTICK_PERIOD_MS);
+        gpio_set_level(YELLOW, HIGH);
+        vTaskDelay(750 / portTICK_PERIOD_MS);
+    }
+}
+
 void app_main() {
     // Set gpio direction
     for (size_t i = 0; i < ARRAY_LENGTH; i++)
@@ -69,6 +82,9 @@ void app_main() {
     // databuffer aanmaken
     uint8_t *data = (uint8_t *) malloc(BUF_SIZE);
 
+    // TASK handles
+    TaskHandle_t xHandle1 = NULL;
+    
     while (1) {
         // Read data from the UART
         int len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 20 / portTICK_PERIOD_MS);
@@ -91,30 +107,28 @@ void app_main() {
                 set_one_to_high(GREEN, LED_PINS_ARR, ARRAY_LENGTH);
                 break;
             case 'A':
-                printf("command: A\n");
-                len = 0;
-                gpio_set_level(RED, LOW);
-                gpio_set_level(GREEN, LOW);
-                while (true)
-                {
-                    printf("Setting HIGH\n");
-                    gpio_set_level(YELLOW, HIGH);
-                    vTaskDelay(500 / portTICK_PERIOD_MS);
-                    printf("Setting LOW\n"); 
-                    gpio_set_level(YELLOW, LOW);
-                    vTaskDelay(500 / portTICK_PERIOD_MS);
-                    printf("Checnking UART for input... \n");
-                    len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 10 / portTICK_PERIOD_MS);
-                    if (len != 0)
-                    {
-                        break;
-                    }
-                    
-                }
+                xTaskCreate(
+                    blink_orange_led,
+                    "Name1",
+                    5000,
+                    NULL,
+                    tskIDLE_PRIORITY,
+                    xHandle1
+                );
+                break;
 
             default:
                 break;
             }
         }
     }
+    
+    xTaskCreate(
+        blink_orange_led,
+        "Name1",
+        5000,
+        NULL,
+        tskIDLE_PRIORITY,
+        xHandle1
+    );
 }
