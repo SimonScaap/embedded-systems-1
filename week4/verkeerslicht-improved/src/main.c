@@ -107,8 +107,8 @@ void app_main() {
             switch (data[0]) {
                 case '1': // Doet alleen de Rode led aan
                     printf("command: 1\n");
-                    set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
                     vTaskSuspend(xHandle1);
+                    set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
                     break;
                 case '2': // Doet alleen de Gele led aan
                     printf("command: 2\n");
