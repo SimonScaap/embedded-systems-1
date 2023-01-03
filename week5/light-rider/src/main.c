@@ -60,6 +60,7 @@ void app_main() {
     */
     while (true)
     {
+        // Heen
         for (size_t i = 0; i < (ARRAY_SIZE - 1); i++)
         {
             adc1Read = adc1_get_raw(POTENTIOMETER);
@@ -70,6 +71,7 @@ void app_main() {
 
             vTaskDelay((adc1Read / 10) / portTICK_PERIOD_MS);
         }
+        // Weer
         for (size_t i = 0; i < (ARRAY_SIZE - 1); i++)
         {
             adc1Read = adc1_get_raw(POTENTIOMETER);
