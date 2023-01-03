@@ -54,12 +54,62 @@ Propagation delay is de vertraging tussen het ingangsignaal ten opzichte van het
 
 ## Verkeerslicht
 
+### Een korte beschijving van het project
+
+Dit project is om een stoplicht-component net zoals een stoplicht te laten knipperen. De gebruiker drukt op een knop. Na een tijd gaat het stoplicht op groen. Daarna op oranje en weer op rood.
+
+### Hoe werkt Verkeerslicht
+
+[Het programma](verkeerslicht/src/main.c) werkt door een stoplichtcyclus te maken die niet onderbroken kan worden door op de knop te drukken. Eerst word gecheckt of de knop ingedrukt is door de huidige waarde `buttonValue` te vergelijken met de vorige waarde `buttonValueCallback`. Als de `buttonvalue` hoger is dan `buttonValueCallback`, dan wordt de functie `traffic_light_cycle()` gecallt.
+
+```c
+void traffic_light_cycle() {
+    // GREEN
+    vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
+    set_one_to_high(GREEN, LED_PINS_ARR, ARRAY_LENGTH);
+    printf("turned on GREEN\n");
+    vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
+    // YELLOW
+    set_one_to_high(YELLOW, LED_PINS_ARR, ARRAY_LENGTH);
+    printf("turned on YELLOW\n");
+    vTaskDelay(TRAFFIC_DELAY_MS / portTICK_PERIOD_MS);
+    // RED
+    set_one_to_high(RED, LED_PINS_ARR, ARRAY_LENGTH);
+    printf("turned on RED\n");
+}
+```
+
+In deze functie wordt de functie `set_one_to_high()` gebruikt. Deze functie zet uit een array met leds 1 aan en de rest uit.
+
+```c
+void set_one_to_high(int pinToSet, int ledPinsArray[], int arrayLength) {
+    for (size_t i = 0; i < arrayLength; i++)
+    {
+        if (pinToSet == ledPinsArray[i])
+        {
+            gpio_set_level(ledPinsArray[i], HIGH);
+            printf("Set %d to HIGH\t", ledPinsArray[i]);
+        } 
+        else
+        {
+            gpio_set_level(ledPinsArray[i], LOW);
+            printf("Set %d to LOW\t", ledPinsArray[i]);
+        }   
+    }
+    printf("\n");
+}
+```
+
 ### Schematisch en fysiek
 
 ![schematisch](../assets/verkeerslicht/verkeerslicht_bb.png)
 ![fysiek](../assets/verkeerslicht/verkeerslicht_physical.jpg)
 
 ## PWM Verkeerslicht
+
+### Een korte beschrijving van het project
+
+### Hoe werkt Verkeerslicht-pwm
 
 ### SChematisch en fysiek
 

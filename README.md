@@ -13,7 +13,6 @@ Dit is de git-repository waarin alle projectjes en programma's voor het vak "Emb
 - [Week 5](/week5/)
 - [Eindopdracht](/week6/)
 
-
 ### De embedded kit
 
 We kopen allemaal een "Embedded Kit" die door docenten van de HvA samengesteld is.
