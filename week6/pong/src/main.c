@@ -9,8 +9,6 @@ int ledBarArray[BAR_SIZE] = {4, 5, 6, 7, 15, 16, 17, 18, 8, 3};
 #define LIVES_SIZE 5
 int livesArray[LIVES_SIZE] = {10, 11, 12, 13, 14};
 
-
-
 typedef struct
 {
     int buttonPin;
@@ -85,13 +83,14 @@ void app_main() {
     }
 
     // Game variabelen
-    //bool gameOver = false;
-    //int lives = 5;
+    bool gameOver = false;
+    int lives = 5;
     int cursorIndex = 0b01;
     
     printf("ledbarIndex: %d\n", cursorIndex);
     
-    // Task maken
+    /* Task maken
+    
     TaskHandle_t xButtonThreadHandle = NULL;
     int parameter = 50;
     int* parameterPtr; 
@@ -99,8 +98,11 @@ void app_main() {
     printf("Mem addr parameter: %d\n\n\n", (int)&parameter);
     xTaskCreate(vPressCheck, "Button", 5000, (void *)parameter, tskIDLE_PRIORITY, &xButtonThreadHandle);
 
+    
+    */ 
+    
     // Led bar heen en weer
-    /*
+    
     while (!gameOver)
     {
         // Heen
@@ -132,7 +134,4 @@ void app_main() {
             printf("Loop Ended\n Lives: %d\n", lives);
         }        
     }
-    */
-
-
 }
