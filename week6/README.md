@@ -12,4 +12,7 @@
 
 ### Schematisch en Fysiek
 
+![schematisch](../assets/pong/pong_bb.png)
+![fysiek](../assets/pong/pong_fysiek.jpg)
+
 ### Bronnen
