@@ -69,7 +69,7 @@ void app_main() {
             printf("Index %d \n", ledOnValue);
             ledOnValue = ledOnValue + 1;
 
-            vTaskDelay((adc1Read / 10) / portTICK_PERIOD_MS);
+            vTaskDelay((adc1Read / 10) + 5/ portTICK_PERIOD_MS);
         }
         // Weer
         for (size_t i = 0; i < (ARRAY_SIZE - 1); i++)
@@ -80,7 +80,7 @@ void app_main() {
             printf("Index %d \n", ledOnValue);
             ledOnValue = ledOnValue - 1;
 
-            vTaskDelay((adc1Read / 10) / portTICK_PERIOD_MS);
+            vTaskDelay((adc1Read / 10) + 5 / portTICK_PERIOD_MS);
         }   
     }
 }
