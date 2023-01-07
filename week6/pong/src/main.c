@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "SevSeg.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
@@ -10,16 +13,19 @@ int ledBarArray[BAR_SIZE] = {4, 5, 6, 7, 15, 16, 17, 18, 8, 3};
 int livesArray[LIVES_SIZE] = {10, 11, 12, 13, 14};
 #define BUTTON_PLAY 46
 #define ZONE_LED 9
+#define INITIAL_DELAY 120
+#define MIN 0
+#define MAX 15
 
-int counter = 0;
-
-typedef struct
-{
-    int buttonPin;
-    int cursorIndex;
-    int lives;
-} ButtonPressData;
-
+    // Game variabelen
+bool buttonClicked = false;
+bool gameOver = false;
+bool earnedPoint = false;
+int lives = 5;
+int cursorIndex = 0b01;
+int baseDelay = INITIAL_DELAY;
+int delayDecay = 3;
+int score = 0;
 
 void update_lives(int score, int livesArray[], int totalLives) {
     for (size_t i = 0; i < totalLives; i++)
@@ -27,12 +33,10 @@ void update_lives(int score, int livesArray[], int totalLives) {
         if (score > i)
         {
             gpio_set_level(livesArray[i], 1);
-            printf("Set pin %d to HIGH\n", livesArray[i]);
         }
         else
         {
             gpio_set_level(livesArray[i], 0);
-            printf("Set pin %d to LOW\n", livesArray[i]);
         }   
     }
 }
@@ -61,6 +65,7 @@ void valid_click(int led, int zoneSize, int cursor) {
             on = true;
         }
     }
+        // Als Je kan klikken gaat de zone led aan
     if (on)
     {
         gpio_set_level(led, 1);
@@ -69,27 +74,26 @@ void valid_click(int led, int zoneSize, int cursor) {
     {
         gpio_set_level(led, 0);
     }
-    
-    
-}
 
-void vPressCheck(void *p) {
-    ButtonPressData *data = (ButtonPressData*)p;
-    int button = data->buttonPin;
-    int cursorindex = data->cursorIndex;
-
-    //int* pointer = (int*)p;
-    while (true)
+        // Als de knop ingedrukt is terwijl dat moet dan gaat er geen leven vanaf
+    if (gpio_get_level(BUTTON_PLAY)) 
     {
-        counter++;
-        printf("Dit zijn de parameters: %d, %d - %d\n", button, cursorindex, counter);
-        vTaskDelay(1500 / portTICK_PERIOD_MS);
+        if (on)
+        {
+
+            buttonClicked = true;
+        }
+        else {
+            buttonClicked = true;
+            lives--;
+            ;
+        }
     }
 }
 
 void app_main() {
     
-    // Zet alle Led pins op GPIO_MODE OUTPUT
+        // Zet alle Led pins op GPIO_MODE OUTPUT
     for (size_t i = 0; i < BAR_SIZE; i++)
     {
         gpio_set_direction(ledBarArray[i], GPIO_MODE_OUTPUT);
@@ -104,7 +108,7 @@ void app_main() {
 
     vTaskDelay(1000 / portTICK_PERIOD_MS);
 
-    // Geeft alle levens van 0-5 weer op de leds
+        // Geeft alle levens van 0-5 weer op de leds
     for (size_t i = 0; i < (LIVES_SIZE + 1); i++)
     {
         update_lives(i, livesArray, LIVES_SIZE);
@@ -112,64 +116,79 @@ void app_main() {
         vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 
-    // Game variabelen
-    bool gameOver = false;
-    int lives = 5;
-    int cursorIndex = 0b01;
-    int delay = 120;
-    int delayDecay = 3;
-    int score = 0;
-    
-    printf("ledbarIndex: %d\n", cursorIndex);
-    
-    // Button Task aanmaken
-    TaskHandle_t xButtonThreadHandle = NULL;
-    //int buttonCache;
-    ButtonPressData buttonData;
-    buttonData.buttonPin = BUTTON_PLAY;
-    buttonData.cursorIndex = 0;
-    //int parameter = 50;
-    void* buttonDataPtr; 
-    buttonDataPtr = &buttonData;
-    printf("Mem addr parameter: %d\n\n\n", (int)&buttonData);
-    xTaskCreate(vPressCheck, "Button", 5000, buttonDataPtr, tskIDLE_PRIORITY, &xButtonThreadHandle);
- 
-    // Led bar heen en weer
-    while (!gameOver)
-    {
-        // Heen
-        for (size_t i = 0; i < (BAR_SIZE - 1); i++)
-        {
-            cursorIndex = cursorIndex << 1;
-            //printf("Led number: %d\n", cursorIndex);
-            update_ledbar(cursorIndex, ledBarArray, BAR_SIZE);
-            valid_click(ZONE_LED, 3, cursorIndex);
-            vTaskDelay(delay / portTICK_PERIOD_MS);
-        }
-        // Terug
-        for (size_t i = 0; i < (BAR_SIZE - 1); i++)
-        {
-            cursorIndex = cursorIndex >> 1;
-            //printf("Led number: %d\n", cursorIndex);
-            update_ledbar(cursorIndex, ledBarArray, BAR_SIZE);
-            valid_click(ZONE_LED, 3, cursorIndex);
-            vTaskDelay(delay / portTICK_PERIOD_MS);
-        }
+    // Seven Segment Display Initialiseren
+    uint8_t numDigits = 4;
+    uint8_t digitPins[] = {39, 38, 1, 2};
+    uint8_t segmentPins[] = {37, 36, 35, 0, 45, 48, 47, 21};
+    sevseg_begin(numDigits, digitPins, segmentPins);
+    sevseg_setChars("8888");
 
-        update_lives(lives, livesArray, LIVES_SIZE);
-        if (lives <= 0)
+        // Random seed initialiseren
+    srand(time(NULL)); // Initaliseer eenmalig de 'seed'
+    int randomDelayOffset;
+
+        // Led bar heen en weer
+    while (true)
+    {
+        if (gpio_get_level(BUTTON_PLAY))
         {
-            gameOver = true;
-        }
-        else
-        {
-            //vTaskDelay(1000 / portTICK_PERIOD_MS);
-            printf("Loop Ended\n Lives: %d\n", lives);
-            score++;
-            if (delay > 50)
+            update_lives(LIVES_SIZE, livesArray, LIVES_SIZE);
+            sevseg_setNumber(score, -1, false);
+
+            while (!gameOver)
             {
-                delay = delay - delayDecay;
+                randomDelayOffset = rand()%((MAX+MIN)-1) + MIN;
+                earnedPoint = false;
+                // Heen
+                for (size_t i = 0; i < (BAR_SIZE - 1); i++)
+                {
+                    cursorIndex = cursorIndex << 1;
+                    update_ledbar(cursorIndex, ledBarArray, BAR_SIZE);
+                    update_lives(lives, livesArray, LIVES_SIZE);                    
+                    vTaskDelay((baseDelay + randomDelayOffset) / portTICK_PERIOD_MS);
+                }
+
+                // Terug
+                for (size_t i = 0; i < (BAR_SIZE - 1); i++)
+                {
+                    cursorIndex = cursorIndex >> 1;
+                    update_ledbar(cursorIndex, ledBarArray, BAR_SIZE);
+                    valid_click(ZONE_LED, 3, cursorIndex);
+                    update_lives(lives, livesArray, LIVES_SIZE);
+                    vTaskDelay((baseDelay + randomDelayOffset) / portTICK_PERIOD_MS);
+                }
+                // Zet de groene led weer uit
+                gpio_set_level(ZONE_LED, 0);
+                if (buttonClicked == false)
+                {
+                    lives--;
+                    earnedPoint = false;
+                }
+                update_lives(lives, livesArray, LIVES_SIZE);                    
+
+                    // Checkt levels
+                if (lives <= 0)
+                {
+                    gameOver = true;
+                }
+                else
+                {
+                    score++;
+                    if (baseDelay > 40)
+                    {
+                        baseDelay = baseDelay - delayDecay;
+                    }
+                }
+                sevseg_setNumber(score, -1, false);
+                buttonClicked = false;
             }
-        }    
+            printf("Score: %d\n", score);
+            gameOver = false;
+            lives = LIVES_SIZE;
+            baseDelay = INITIAL_DELAY;
+            score = 0;
+            vTaskDelay(100 / portTICK_PERIOD_MS); // Delay zodat het spel niet opnieuw start als je net te laat bent
+        }
+        vTaskDelay(20 / portTICK_PERIOD_MS);
     }
 }
