@@ -1,3 +1,9 @@
+/*
+Dit programma is om 1 dimensionaal pong te spelen
+@author Simon Zweers
+@date 03 01 2023
+*/
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
