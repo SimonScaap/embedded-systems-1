@@ -37,10 +37,10 @@ int randomDelayOffset;
 int delayDecay = DECAY;
 char nameUser[20];
 
-void updateLives(int score, int livesArray[], int totalLives) {
+void updateLives(int lives, int livesArray[], int totalLives) {
     for (size_t i = 0; i < totalLives; i++)
     {
-        if (score > i)
+        if (lives > i)
         {
             gpio_set_level(livesArray[i], 1);
         }
