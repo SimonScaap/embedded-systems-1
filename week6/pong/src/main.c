@@ -11,6 +11,7 @@ Dit programma is om 1 dimensionaal pong te spelen
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "driver/gpio.h"
+#include "driver/uart.h"
 
 #define BAR_SIZE 10
 int ledBarArray[BAR_SIZE] = {4, 5, 6, 7, 15, 16, 17, 18, 8, 3};
@@ -23,6 +24,7 @@ int livesArray[LIVES_SIZE] = {10, 11, 12, 13, 14};
 #define DECAY 3
 #define MIN 0
 #define MAX 15
+#define BUF_SIZE (1024)
 
     // Game variabelen
 bool buttonClicked = false;
@@ -33,7 +35,7 @@ int cursorIndex = 0b01;
 int baseDelay = INITIAL_DELAY;
 int randomDelayOffset;
 int delayDecay = DECAY;
-int score = 0;
+char nameUser[20];
 
 void update_lives(int score, int livesArray[], int totalLives) {
     for (size_t i = 0; i < totalLives; i++)
@@ -100,7 +102,8 @@ void valid_click(int led, int zoneSize, int cursor) {
     }
 }
 
-void game_loop(){
+int game_loop(){
+    int score = 0;
     update_lives(LIVES_SIZE, livesArray, LIVES_SIZE);
     sevseg_setNumber(score, -1, false);
 
@@ -159,9 +162,37 @@ void game_loop(){
     gameOver = false;
     lives = LIVES_SIZE;
     baseDelay = INITIAL_DELAY;
-    score = 0;
     vTaskDelay(100 / portTICK_PERIOD_MS); // Delay zodat het spel niet opnieuw start als je net te laat bent
+    return score;
+}
 
+void get_name() {
+    uint8_t *data = (uint8_t *) malloc(BUF_SIZE); // buffer voor UART data
+    int index = 0;
+    bool nameIsComplete;
+    nameIsComplete = false;
+    printf("Please enter your name (press ENTER to submit):\n");
+    while (!nameIsComplete) {
+
+        // Read data from the UART
+        int len = uart_read_bytes(UART_NUM_0, data, (BUF_SIZE - 1), 20 / portTICK_PERIOD_MS);
+
+        if (len) {
+            data[len] = '\0';
+            if (data[0] == '\r' || data[0] == '\n') // Als de enter toets wordt ingedrukt stopt de loop met input verwachten
+            {
+                nameIsComplete = true;
+                nameUser[index] = '\0';
+            }
+            else
+            {
+                nameUser[index] = data[0];
+            }
+            printf("%s\r", data);
+            index++;
+        }
+    }
+    printf("Now press the button to start\n");
 }
 
 void app_main() {
@@ -195,15 +226,32 @@ void app_main() {
     sevseg_begin(numDigits, digitPins, segmentPins);
     sevseg_setChars("8888");
 
+
+    // Uart config
+    uart_config_t uart_config = {
+        .baud_rate = 115200,
+        .data_bits = UART_DATA_8_BITS,
+        .parity    = UART_PARITY_DISABLE,
+        .stop_bits = UART_STOP_BITS_1,
+        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE
+    };
+    uart_driver_install(UART_NUM_0, BUF_SIZE * 2, 0, 0, NULL, 0);
+    uart_param_config(UART_NUM_0, &uart_config);
+    uart_set_pin(UART_NUM_0, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
         // Random seed initialiseren
     srand(time(NULL)); // Initaliseer eenmalig de 'seed'
-        // Led bar heen en weer
+
+    
     while (true)
     {
-        if (gpio_get_level(BUTTON_PLAY))
+        get_name();
+        while (!gpio_get_level(BUTTON_PLAY))
         {
-            game_loop();
+            vTaskDelay(10 / portTICK_PERIOD_MS);
         }
+        printf("Current Player: %s \n", nameUser);
+        int score = game_loop();
+        printf("Final score for %s: %d\n\n", nameUser, score);
         vTaskDelay(20 / portTICK_PERIOD_MS);
     }
 }
