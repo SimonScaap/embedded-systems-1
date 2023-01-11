@@ -158,7 +158,6 @@ int game_loop(){
         sevseg_setNumber(score, -1, false);
         buttonClicked = false;
     }
-    printf("Score: %d\n", score);
     gameOver = false;
     lives = LIVES_SIZE;
     baseDelay = INITIAL_DELAY;
