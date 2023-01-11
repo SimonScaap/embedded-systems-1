@@ -37,7 +37,7 @@ int randomDelayOffset;
 int delayDecay = DECAY;
 char nameUser[20];
 
-void update_lives(int score, int livesArray[], int totalLives) {
+void updateLives(int score, int livesArray[], int totalLives) {
     for (size_t i = 0; i < totalLives; i++)
     {
         if (score > i)
@@ -51,7 +51,7 @@ void update_lives(int score, int livesArray[], int totalLives) {
     }
 }
 
-void update_ledbar(int ledIndex, int ledBarArray[], int totalLeds) {
+void updateLedbar(int ledIndex, int ledBarArray[], int totalLeds) {
     for (size_t i = 0; i < totalLeds; i++)
     {
 
@@ -66,7 +66,7 @@ void update_ledbar(int ledIndex, int ledBarArray[], int totalLeds) {
     }
 }
 
-void valid_click(int led, int zoneSize, int cursor) {
+void validClick(int led, int zoneSize, int cursor) {
     bool on = false;
     for (size_t i = 0; i < zoneSize; i++)
     {
@@ -102,9 +102,9 @@ void valid_click(int led, int zoneSize, int cursor) {
     }
 }
 
-int game_loop(){
+int gameLoop(){
     int score = 0;
-    update_lives(LIVES_SIZE, livesArray, LIVES_SIZE);
+    updateLives(LIVES_SIZE, livesArray, LIVES_SIZE);
     sevseg_setNumber(score, -1, false);
 
     while (!gameOver)
@@ -115,8 +115,8 @@ int game_loop(){
         for (size_t i = 0; i < (BAR_SIZE - 1); i++)
         {
             cursorIndex = cursorIndex << 1;
-            update_ledbar(cursorIndex, ledBarArray, BAR_SIZE);
-            update_lives(lives, livesArray, LIVES_SIZE);                    
+            updateLedbar(cursorIndex, ledBarArray, BAR_SIZE);
+            updateLives(lives, livesArray, LIVES_SIZE);                    
             vTaskDelay((baseDelay + randomDelayOffset) / portTICK_PERIOD_MS);
         }
 
@@ -124,9 +124,9 @@ int game_loop(){
         for (size_t i = 0; i < (BAR_SIZE - 1); i++)
         {
             cursorIndex = cursorIndex >> 1;
-            update_ledbar(cursorIndex, ledBarArray, BAR_SIZE);
-            valid_click(ZONE_LED, 3, cursorIndex);
-            update_lives(lives, livesArray, LIVES_SIZE);
+            updateLedbar(cursorIndex, ledBarArray, BAR_SIZE);
+            validClick(ZONE_LED, 3, cursorIndex);
+            updateLives(lives, livesArray, LIVES_SIZE);
             vTaskDelay((baseDelay + randomDelayOffset) / portTICK_PERIOD_MS);
         }
         // Zet de groene led weer uit
@@ -136,7 +136,7 @@ int game_loop(){
             lives--;
             earnedPoint = false;
         }
-        update_lives(lives, livesArray, LIVES_SIZE);                    
+        updateLives(lives, livesArray, LIVES_SIZE);                    
 
             // Checkt levels
         if (lives <= 0)
@@ -165,7 +165,7 @@ int game_loop(){
     return score;
 }
 
-void get_name() {
+void getName() {
     uint8_t *data = (uint8_t *) malloc(BUF_SIZE); // buffer voor UART data
     int index = 0;
     bool nameIsComplete;
@@ -214,7 +214,7 @@ void app_main() {
         // Geeft alle levens van 0-5 weer op de leds
     for (size_t i = 0; i < (LIVES_SIZE + 1); i++)
     {
-        update_lives(i, livesArray, LIVES_SIZE);
+        updateLives(i, livesArray, LIVES_SIZE);
         vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 
@@ -243,13 +243,13 @@ void app_main() {
     
     while (true)
     {
-        get_name();
+        getName();
         while (!gpio_get_level(BUTTON_PLAY))
         {
             vTaskDelay(10 / portTICK_PERIOD_MS);
         }
         printf("Current Player: %s \n", nameUser);
-        int score = game_loop();
+        int score = gameLoop();
         printf("Final score for %s: %d\n\n", nameUser, score);
         vTaskDelay(20 / portTICK_PERIOD_MS);
     }
