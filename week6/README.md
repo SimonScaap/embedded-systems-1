@@ -99,6 +99,13 @@ Als daar true uit komt dat gaat die specifieke led aan, anders uit.
 
 `updateLedbar()`:
 Deze functie zorgt dat de LEDs in de LEDbar geupdate worden.
+In deze functie wordt een "cursor" deze wordt met bit-shifting verschoven.
+De cursor is 1 bit de steeds verschuift.
+Net als in de functie `updateLives()` worden elke pins aan of uitgezet op basis van een for-loop.
+
+`validClick()`:
+Deze functie checkt of de knop op het juiste moment wordt ingedrukt. Als het het juiste moment is om te klikken, dan gaat er een led aan.
+In een for-loop wordt de cursor vergeleken met de "zone" `zoneSize`.c
 
 `gameloop()`:
 Deze functie is het hart van het spel.
