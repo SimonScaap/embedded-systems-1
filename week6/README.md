@@ -6,7 +6,7 @@
 
 ### Een korte beschrijving van het project
 
-Er zijn was keuze uit 3 verschillende eindopdrachten; Led Choreografie, Pong en Weerstation.
+Er was keuze uit 3 verschillende eindopdrachten; Led Choreografie, Pong en Weerstation.
 Ik heb pong gekozen.
 De opdracht was om een spel te maken dat een beetje lijkt op pong.
 Over de 10 leds van de LEDbar beweegt heen en weer een oplichtende led.
