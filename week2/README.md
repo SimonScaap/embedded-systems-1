@@ -2,18 +2,72 @@
 
 ## Vraagstukken
 
-### Wat is het verschil tussen een objectgeoriënteerde en een proceduregerichte taal?
+### Talstelsels
 
-### Wat is een crosscompiler?
+Er zijn veel verschillende manieren om getallen uit te drukken.
+Getallen kunnen uitgedrukt worden in verschillende talstelsels.
+De vaakstgebruikte talstelsels zijn 10-tallig, hexadecimaal en binair.
 
-Een crosscompiler is een programma dat op een systeem code compileert voor een ander systeem in plaats van de eigen processor.
+### Binair talstelsel
 
-### Wat is het verschil tussen interpreteren en compileren?
+Het binaire talstelser word door computers voor alles gebruikt.
+In binair worden meer dingen dan getallen, zoals tekst, CPU instructies etc. uitgedrukt.
 
-Interpreteren: Elke lijn van een programma word een voor een omgezet in instructies.
-Compileren: Het hele programma word in 1 keer omgezet in instructies.
+`Bit`: Een bit is een enkele 1 of 0.
 
-## 7 Segment Display
+`Byte`: Een groep van 8 bits.
+
+`Nibble`: Een halve byte; een groep van 4 bits.
+
+`Most/least significant bit`:
+Most significant bit (MSB) wil zeggen dat een bit de hoogste waarde heeft.
+De MSB staat aan de linker kant van een binair getal (2^n-1^).
+Least significant bit (LSB) wil zeggen dat een bit de laagste waarde heeft.
+De LSB staat aan de linker kant van een binair getal (2^0^).
+
+### Reken grootheden
+
+Normale voorvoegseltabel:
+Voorvoegsel | IEC-voorvoegsel | Afkorting | IEC- afkorting| Tweemacht
+-|-|-|-|-
+Kilo    | Kibi | k of K | Ki | 2^10
+Mega    | Mebi | M | Mi | 2^20
+Giga    | Gibi | G | Gi | 2^30
+Tera    | Tebi | T | Ti | 2^40
+Peta    | Pebi | P | Pi | 2^50
+Exa     | Exbi | E | Ei | 2^60
+Zetta   | Zebi | Z | Zi | 2^70
+Yotta   | Yobi | Y | Yi | 2^80
+
+### Vertaaltabel met meerdere talstelsels
+
+| Decimal | Binary   | Hexadecimal |
+|---------|----------|-------------|
+| 0       | 0000     | 0x0         |
+| 1       | 0001     | 0x1         |
+| 2       | 0010     | 0x2         |
+| 3       | 0011     | 0x3         |
+| 4       | 0100     | 0x4         |
+| 5       | 0101     | 0x5         |
+| 6       | 0110     | 0x6         |
+| 7       | 0111     | 0x7         |
+| 8       | 1000     | 0x8         |
+| 9       | 1001     | 0x9         |
+| 10      | 1010     | 0xA         |
+| 11      | 1011     | 0xB         |
+| 12      | 1100     | 0xC         |
+| 13      | 1101     | 0xD         |
+| 14      | 1110     | 0xE         |
+| 15      | 1111     | 0xF         |
+
+### 2's-complementcode
+
+`2's-complementcode`:
+2's complementcode is een veelgebruikte manier om negatieve nummers in het binair talstelsel weer te geven.
+In 2's complement telt de MSB voor een negatief getal ipv een positief getal.
+Bijv.:
+
+`1010` in 2's comeplment is `-2` want de bit op plaats 4 heeft een waarde van `-8`.
 
 ## Led-bar tellen
 
