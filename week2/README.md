@@ -1,5 +1,7 @@
 # Week 2
 
+
+
 ## Vraagstukken
 
 ### Talstelsels
@@ -21,23 +23,23 @@ In binair worden meer dingen dan getallen, zoals tekst, CPU instructies etc. uit
 
 `Most/least significant bit`:
 Most significant bit (MSB) wil zeggen dat een bit de hoogste waarde heeft.
-De MSB staat aan de linker kant van een binair getal (2^n-1^).
+De MSB staat aan de linker kant van een binair getal (2<sup>n-1</sup>).
 Least significant bit (LSB) wil zeggen dat een bit de laagste waarde heeft.
-De LSB staat aan de linker kant van een binair getal (2^0^).
+De LSB staat aan de linker kant van een binair getal (2<sup>0</sup>).
 
 ### Reken grootheden
 
 Normale voorvoegseltabel:
 Voorvoegsel | IEC-voorvoegsel | Afkorting | IEC- afkorting| Tweemacht
 -|-|-|-|-
-Kilo    | Kibi | k of K | Ki | 2^10
-Mega    | Mebi | M | Mi | 2^20
-Giga    | Gibi | G | Gi | 2^30
-Tera    | Tebi | T | Ti | 2^40
-Peta    | Pebi | P | Pi | 2^50
-Exa     | Exbi | E | Ei | 2^60
-Zetta   | Zebi | Z | Zi | 2^70
-Yotta   | Yobi | Y | Yi | 2^80
+Kilo    | Kibi | k of K | Ki | 2<sup>10</sup>
+Mega    | Mebi | M | Mi | 2<sup>20</sup>
+Giga    | Gibi | G | Gi | 2<sup>30</sup>
+Tera    | Tebi | T | Ti | 2<sup>40</sup>
+Peta    | Pebi | P | Pi | 2<sup>50</sup>
+Exa     | Exbi | E | Ei | 2<sup>60</sup>
+Zetta   | Zebi | Z | Zi | 2<sup>70</sup>
+Yotta   | Yobi | Y | Yi | 2<sup>80</sup>
 
 ### Vertaaltabel met meerdere talstelsels
 
@@ -68,6 +70,220 @@ In 2's complement telt de MSB voor een negatief getal ipv een positief getal.
 Bijv.:
 
 `1010` in 2's comeplment is `-2` want de bit op plaats 4 heeft een waarde van `-8`.
+
+### BCD
+
+`BCD`: Binary Coded Decimal.
+
+Met BCD wordt een decimaal getal uitgedrukt in binaire waardes.
+Elk decimaal nummer wordt apart in binair omgezet.  
+Bijvoorbeeld:
+`278 -> 0010 0111 1000`
+
+### ASCII en ISO 8859
+
+`ASCII`: American Standard Code for Information Exchange.
+
+ASCII wordt gebruikt voor dataoverdracht in tekstvorm tussen computers.
+ASCII beval naast letters, cijfers, leestekens etc. ook nog functiecodes.
+Voorbeelden zijn: Backspace(positie terug), Line Feed(nieuwe regel) en Carriage return(naar begin van de regel).
+
+![ascii](../assets/ascii.png)
+
+`ISO 8859`: ISO 8859 is een overkoepelende term voor uitbreidingen van ASCII. ISO 8859 is dus een superset van ASCII. Zo kunnen bijvoorbeeld ook russische of griekse letters gecommuniceerd worden.
+
+`Unicode`: Unicode is een veel grotere superset van ASCII.
+Het doel van Unicode is om alle letters en tekens van ook maar elk alfabet/taal op te nemen.
+Ook emoji's dus.
+Unicode characters kunnen 1-4 bytes groot zijn.
+
+### Logische niveaus
+
+`Logisch niveau`: Simpelweg een binaire waarde.
+Voorbeelden om een logisch niveau aan te duiden zijn:
+High or Low, True or False, 1 of 0.
+
+In TTL schakelingen zijn er spanningsdrempels die het logische niveau bepalen:
+Niveau | Ingang | Uitgang
+-|-|-
+0 | V<sub>in</sub> $\leq$ 0,8V | V<sub>in</sub> $\leq$ 0,4V
+1 | V<sub>in</sub> $\geq$ 2,0V | V<sub>in</sub> $\geq$ 2,4V
+
+### Booleaanse algebra
+
+`OR functie`: $F = A + B$
+
+| A | B | F |
+|-|-|----|
+| 0 | 0 |   0 |
+| 0 | 1 |   1 |
+| 1 | 0 |   1 |
+| 1 | 1 |   1 |
+
+<img src="../assets/or.png" width="50%"></img>
+
+`AND functie`: $F = A \cdot B$
+
+Truth table
+|A|B|F|
+|-|-|-------|
+|0|0|   0   |
+|0|1|   0   |
+|1|0|   0   |
+|1|1|   1   |
+
+<img src="../assets/and.png" width="50%"></img>
+
+`NOT functie`: $F = \overline{A}$
+
+### NOT gate
+
+| A | F |
+|---|----|
+|  0 |   1 |
+|  1 |   0 |
+
+<img src="../assets/not.png" width="50%"></img>
+
+`NAND functie`: $F = \overline{A \cdot B}$
+
+| A | B | F |
+|-|-|-|
+| 0 | 0 | 1 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+<img src="../assets/nand.png" width="50%"></img>
+
+`NOR functie`: $F = \overline{A + B}$
+
+| A | B | F |
+|:-:|:-:|----:|
+| 0 | 0 |   1 |
+| 0 | 1 |   0 |
+| 1 | 0 |   0 |
+| 1 | 1 |   0 |
+
+<img src="../assets/nor.png" width="50%"></img>
+
+`EXOR functie`: $F = A \oplus B$
+
+| A | B | F |
+|:-:|:-:|----:|
+| 0 | 0 |   0 |
+| 0 | 1 |   1 |
+| 1 | 0 |   1 |
+| 1 | 1 |   0 |
+
+<img src="../assets/xor.png" width="50%"></img>
+
+### Tijdsdiagrammen en propogation delay
+
+`Tijdsdiagram`: In een tijdsdiagram kun je de logische niveaus van een schakeling door de tijd noteren.  
+`Positieve flank`: De overgang van logisch niveau 0 naar 1  
+`Negatieve flank`: De overgang van logisch niveau 1 naar 0  
+`Propogation delay`: Een flank is niet oneindig stijl.
+Met propogation delay wordt de vertraging tussen het ingangsignaal en het uitgangssignaal bedoelt.
+Meestal is de propogation delay voor 1 logische schakeling iets in de orde van nanoseconden.
+Hoe meer logische schakelingen er in een combinatorische schakeling, hoe groter de propogation delay, want de propogation bouwt zich op met elke schakeling.  
+
+### Combinatorische schakelingen
+
+`Combinatoriesche schakelingen`: Hebben een of meer ingangen.
+Produceren een resultaat in de vorm van logische niveaus.  
+`Comparator`: Vergelijkt 2 getallen en kan 3 verschillende waardes geven:  
+$A > B$  
+$A = B$  
+$A < B$  
+
+![comparator](../assets/comparator.png)
+
+`Multiplexer/demultiplexer`: Een multiplexer wordt ook wel een keuzeschakelaar genoemt.
+Zorgt ervoor dat een van de ingangen doorgeschakelt wordt naar de uitgang.
+Dit kan door de "select" ingangen.
+Door veschillende waardes op de select ingangen te zetten kun je bepalen welk van de ingangen doorgecshakeld wordt.
+Als je het signaal wil scheiden moet ja dat via een demultiplexer.
+Door weer select uitgangen te gebruiken kun je weer bepalen naar welke uitgang het signaal doorgeschakeld wordt.  
+![mux-demux](../assets/mux-demux.png)
+
+### Geheugenschakelingen
+
+`Geheugenschakelingen`: Kunnen bits onthouden.  
+`Register`: Een reeks bijeen horende geheugenelementen
+
+![register](../assets/register.png)
+
+`Scguifregister`: Een register, maar dan met een shift-ingang.
+Op de D<sub>0</sub> ingang kunnen bits gezet worden, die dan vervolgens met een LOAD-signaal geladen worden op het register.
+Als er een signaal op de schift-ingang staat, dan schuiven alle bits 1 plaats op naar de uitgang.
+In het schuifregister van de figuur hieronder is het 8 SHIFT-signalen om het volledige register te legen
+
+![schuifregister](../assets/schuifregister.png)
+
+`Flip-flop`: Een flip-flop is een logische schakeling die 1 bit kan onthouden.
+Het is een geheugenelement voor 1 bit.
+Er zijn veel verschillende soorten flipflops.
+
+`Active-high`: Activeerd bij een positieve flank.
+
+`Active-low`: Activeerd bij een negatieve flank.
+
+`RS-flipflop`: Reset-Set flipflop heeft inganen S en R.
+Als er een positieve flank staat op de S ingang, staat er op de C/Q
+
+![rs-schematisch](../assets/rs-flipflop-schem.png)
+![rs-symbool](../assets/rs-flipflop-symbool.png)
+![rs-symbool](../assets/rs-flipflop-tijdsdiagram.png)
+
+Een active low RS-flipflop is een normale RS-flipflop maar dan zijn de de signalen standaar hoog, en treed er verandering op bij een negatieve flank.  
+
+![rs-nand-schem](../assets/rs-nand-schematisch.png)
+![rs-nand-schem](../assets/rs-nand-symbol.png)
+
+`D-flipflop`: Een D-flipflop onthoudt het signaal om de D invoer bij een nieuwe klokpuls. Als er het signaal D 0 is tijdens een klokpuls, dan slaat de flipflop 0 op. Als D 1 is tijdens een klokpuls wordt 1 opgeslagen.
+
+![d-flipflop](../assets/d-flipflop-symbool.png)
+![d-flipflop](../assets/d-flipflop-tijdsdiagram.png)
+
+`JK-flipflop`: Een JK-flipflop heeft ook een klokingang, maar werkt iets anders dan een D-flipflop.
+Er zijn 4 situaties mogelijk.  
+$J = K = 0$ : Q veranderd niet na triggering  
+$J = 1, K = 0$ : Q wordt (of blijft) 1  
+$J = 1, K = 0$ : Q wordt (of blijft) 0  
+$J = K = 1$ : Q wordt geïnverteerd na klokpuls
+
+![jk-flipflop](../assets/jk-flipflop-symbool.png)
+
+`JK-MS-flipflop`: Een JK-Master-Slave flipflop werkt hetzelfde als een normale JK-flipflop, maar dan is zit er een delay in tussen de ingangen en uitgangen.
+Bij een positieve flank wordt het signaal opgeslagen in de master component.
+Pas bij een negatieve flank wordt het signaal opgeslagen in de slave component.
+
+![jk-ms](../assets/jk-ms-flipflop-symbool.png)
+![jk-ms-tijds](../assets/jk-ms-flipflop-tijdsdiagram.png)
+
+`Synchrone ingang`: De J, K en D van de JK- en D-flipflops zijn synchrone ingangen.
+Dit betekend dat ze afhanknelijk zijn van een klokpuls.
+
+`Asynchrone ingang`: Asynchrone ingangen zijn inganken die niet afhankelijk zijn van een klokpuls.
+Voorbeelden hiervan zijn eventuele "preset" en "clear" ingangen.
+De preset ingang zet de flipflop op 1, de clear ingang op 0, afhankelijk afhankelijk van de klok.
+
+![jk-ms-async](../assets/jk-ms-async.png)
+
+`Data-latch`: De data-latch werkt hetzelfde als een D-flipflop, maar in plaats dat deze afhankelijk is van een klokpuls, is er een enable-ingang (E).
+Als E getriggered wordt dan slaat de data-latch het signaal op de D-ingang op.
+
+![d-latch](../assets/d-latch-symbool.png)
+![d-latch-tijds](../assets/d-latch-tijdsdiagram.png)
+
+### Fan-in Fan-out
+
+`Standaardbelasting`: Een gedefinieerde eenheid die aangeeft hoeveel inputs je op de output van een circuit kan aansluiten zonder een performancevermindering.  
+`Fan-out`: Een term voor het aantal inputs dat je kan aansluiten op een output uitgedrukt in standaardbelasting.
+Met een fan-out van 10 kan je 10 inputs aanstluiten zonder een drop in performance.  
+`Fan-in`: Een term voor het aantal inputs dat een circuit aan kan uitgedrukt in standaardbelasting.
+Met een fan-out van 4 kan een gate maximaal 4 inputs aan.  
 
 ## Led-bar tellen
 
