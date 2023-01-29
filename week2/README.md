@@ -1,6 +1,29 @@
 # Week 2
 
-
+- [Week 2](#week-2)
+  - [Vraagstukken](#vraagstukken)
+    - [Talstelsels](#talstelsels)
+    - [Binair talstelsel](#binair-talstelsel)
+    - [Reken grootheden](#reken-grootheden)
+    - [Vertaaltabel met meerdere talstelsels](#vertaaltabel-met-meerdere-talstelsels)
+    - [2's-complementcode](#2s-complementcode)
+    - [BCD](#bcd)
+    - [ASCII en ISO 8859](#ascii-en-iso-8859)
+    - [Logische niveaus](#logische-niveaus)
+    - [Booleaanse algebra](#booleaanse-algebra)
+    - [NOT gate](#not-gate)
+    - [Tijdsdiagrammen en propogation delay](#tijdsdiagrammen-en-propogation-delay)
+    - [Combinatorische schakelingen](#combinatorische-schakelingen)
+    - [Geheugenschakelingen](#geheugenschakelingen)
+    - [Fan-in Fan-out](#fan-in-fan-out)
+    - [Flipflop schakelingen](#flipflop-schakelingen)
+    - [Speciale uitgangen](#speciale-uitgangen)
+  - [Led-bar tellen](#led-bar-tellen)
+    - [Hoe werkt het?](#hoe-werkt-het)
+    - [Shematisch en fysiek](#shematisch-en-fysiek)
+  - [Hoeveel heb je op?](#hoeveel-heb-je-op)
+    - [Hoe werkt de het?](#hoe-werkt-de-het)
+    - [Schematisch en fysiek](#schematisch-en-fysiek)
 
 ## Vraagstukken
 
@@ -285,9 +308,60 @@ Met een fan-out van 10 kan je 10 inputs aanstluiten zonder een drop in performan
 `Fan-in`: Een term voor het aantal inputs dat een circuit aan kan uitgedrukt in standaardbelasting.
 Met een fan-out van 4 kan een gate maximaal 4 inputs aan.  
 
+### Flipflop schakelingen
+
+`CRC-hardware`: Een schakeling om Cyclic-Redundancy-Checks te genereren en te controleren.
+Als inputs zijn er een klok een een bitstroom.
+
+![crc](../assets/crc-hardware.png)
+
+Door de CRC-hardware een bitstroom aan te biedenmet 4 extra bits, genereer je voor die bitstroom een CRC van 4 bits.
+Diezelfde checksum wordt gebruikt bij het checken van de bitstroom.
+Dezelfde schakeling kan gebruikt worden voor verifiëren van de bitstroom.
+Als de 4 toegevoegde bits weer opnieuw op `0000` uitkomen, dan is de inhoud van de data niet veranderd.
+
+![crc](../assets/crc-example.png)
+
+`Binary ripple counter`: Een "ripple counter" is een soort binaire teller die d.m.v. een kloksignaal zijn waarde verhoogt.
+Dit maakt gebruikt van het feit dat als de J en K ingangen van een JK-MS-flipflop beide 1 zijn, de waarde op de uitgang "flipt".
+Bij een ripple-counter staan de J en K ingangen dus op 1.
+
+![r-i-p-p-l-e](../assets/ripple-counter-schematic.png)
+![telsequentie-ripplecounter](../assets/ripple-counter-telsequentie.png)
+
+De naam "binary ripple counter" komt door het optreden van propogation delay.
+Bij elke flipflop treed er meer propogation delay, vandeer het "ripple" effect.
+Dit kun je zien in het tijdsdiagram.
+
+![ripple-tijdsdiagram](../assets/ripple-counter-tijdsdiagram.png)
+
+`PRNG`: Een Psuedo Random Number Generator produceert een psuedo-willikeurig getal.
+Psuedo willikeurig omdat het alsnog een logische schakeling is en dus een voorspelbare uitkomst heeft.
+Het is dus geen echt "random" getal.
+Het getal 0 komt niet voor, want dan blijft de PRNG alleen maar het getal 0 geven.
+Dat komt door dat XOR-gate.
+als alle flipflops met de waarde 0 beginnen herhaalt de operatie $0  \oplus 0$ zich, waar altijd 0 uitkomt.
+
+![prng](../assets/prng-schematisch.png)
+![prng-tel](../assets/prng-telsequentie.png)
+
+### Speciale uitgangen
+
+`Sperren`: Als de stroomkring breken.  
+`Geleiden`: De stroomkring door laten lopen (geleiden).
+
+![sperren-geleiden](../assets/sperren-geleiden.png)
+
+`Kortsluiting`: Kortsluiting treed op wanneer een stroom door minder elektronische componenten gaat dan de bedoeling is.
+Een voorbeeld is wanneer de pluspool van een accu zonder tussenstap is verbonden met de minpool.
+Een ander voorbeeld is wanneer 2 uitgangen van logische schakelingen met een veschillend logisch niveau met elkaar verbonden worden.
+
+![kortsluiting](../assets/kortsluiting.png)
+
 ## Led-bar tellen
 
-Probleem: Je kan niet binair tellen. Oplossing: Je maakt een apparaat dat binair voor jou telt. Dit project zorgt ervoor dat binaire waardes om de seconde worden weergegeven op een led-bar.
+Probleem: Je kan niet binair tellen. Oplossing: Je maakt een apparaat dat binair voor jou telt.
+Dit project zorgt ervoor dat binaire waardes om de seconde worden weergegeven op een led-bar.
 
 ### Hoe werkt het?
 
@@ -326,7 +400,7 @@ void setLedValues (int numberToConvert, int numOfDigits, int ledPinsArr[]) {
 }
 ```
 
-Shematische en fysieke foto's van het project:
+### Shematisch en fysiek
 
 ![schematisch](../assets/led-bar-tellen/led_bar_tellen_bb.png)
 ![fysiek](../assets/led-bar-tellen/led_bar_tellen_photo.png)
