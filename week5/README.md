@@ -12,6 +12,7 @@
     - [Speciale CPU-registers](#speciale-cpu-registers)
     - [IO](#io)
     - [Exceptions](#exceptions)
+    - [Systeembussen](#systeembussen)
   - [Lightrider](#lightrider)
     - [Hoe werkt het?](#hoe-werkt-het)
     - [Schematisch en fysiek](#schematisch-en-fysiek)
@@ -266,12 +267,21 @@ Zo reageert de CPU meestal op een interrupt:
 `ISR`:
 Interrup Service Routine.
 Een stuk code deat uitgevoerd word als de CPU een bepaalde interrupt krijgt.
-De ISR is altijd op een vast geheugenadres te vinden.
+De ISR is altijd op een vast geheugenadres te vinden, genaamd de "exception vector".
+
+`Exception vector`:
+Een vast adres in geheugen waarin de eerste instructie van een exception handler.
+Het programma dat begint op de de exception vector wordt uitgevoerd als er een exception optreed in de CPU.
 
 `Non-maskable interrupt`:
 De CPU kan sommige interrupts negeren.
 Non-maskable interrupts kunnen niet genegeert worden door de CPU.
 Deze wordt in noodsituaties, zoals falende hardware of wegvallende spanning gebruikt.
+
+### Systeembussen
+
+`Busmaster`:
+Een busmaster kan 
 
 ## Lightrider
 
