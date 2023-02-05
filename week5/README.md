@@ -13,6 +13,9 @@
     - [IO](#io)
     - [Exceptions](#exceptions)
     - [Systeembussen](#systeembussen)
+    - [PCI-express](#pci-express)
+    - [DMA](#dma)
+    - [Filesystemen](#filesystemen)
   - [Lightrider](#lightrider)
     - [Hoe werkt het?](#hoe-werkt-het)
     - [Schematisch en fysiek](#schematisch-en-fysiek)
@@ -245,6 +248,8 @@ Deze instructies kunnen speciaal geheugen adresseren.
 De CPU communiceert met de peripherals door speciale poorten of hardware interfaces.
 Wordt vaak gebruikt voor situaties waar snelle communicatie tussen de CPU en de IO nodig is.
 
+![io-spaces](../assets/io-soorten.png)
+
 ### Exceptions
 
 Bij een exception zet zet de CPU de waardes van de registers op de stack. Daarna word naar een geheugenplaats gesprongen waar de exception handler staat.
@@ -280,8 +285,135 @@ Deze wordt in noodsituaties, zoals falende hardware of wegvallende spanning gebr
 
 ### Systeembussen
 
+Voor dembesturing van een computersysteem kun je de CPU centraal stellen.
+Dit werkt goed voor kleine systemen.  
+Je kan ook de bus centraal stellen.
+Dit heeft het voordeel dat bussen dan gedisigned worden om met meerdere CPU's te werken.
+Als de bus centraal staat is het makkelijker om meerdere componenten te gebruiken in het systeem.
+Het is dan niet systeemspecifiek.
+Een leverancier kan dan hardware designen op basis van de bus, zodat de hardware met veel verschillende CPU's kan samenwerken.
+
+`Initiator`:
+De initiator start communicatie via de bus; neemt initiatief.
+
+`Target`:
+Communiceert over de bus nadat de initiator met de target communicatie heeft gestart.
+
 `Busmaster`:
-Een busmaster kan 
+Een busmaster kan de bus claimen en datatransfers starten.
+Als een busmaster probeert te communiceren met een niet-bestaande busslave onstaat er een buserror.
+Een buserror is een signaal op de controlebus dat gegeven wordt na een bepaalde tijd.
+Er wordt voor het geven van de buserror een harwaretimer gestart.
+De bus kan initiator en target zijn.
+
+`Busslave`:
+De busslave kan niet de bus voor zichzelf claimen.
+De busmaster initialiseerd datatransfer met de busslave.
+De bussslave wacht dus tot de de busmaster communicatie start.
+De busslace kan alleen maar target zijn.
+
+`Asynchrone bus`:
+Bustransfers zijn niet direct gekoppeld aan het kloksignaal.  
+Het VMA (Valid Memory Address) signaal geeft aan of het adres op de bus stabiel is.  
+Het DTACK(Datatransfer Acknowledge)-signaal geeft aan of de data beschikbaar is op de databus.  
+read/!write signaal geeft net zoals altijd aan of er gelezen of geschreven moet worden.  
+Als het DTACK-signaal niet gegeven wordt, zal de read/write cyclus langer duren.
+Als dit te lang duurt dan zal er een bus error gegeven worden.
+Dit heet een bustimeout.
+
+![async-bus](../assets/asynchrone-bus.png)
+
+`Synchrone bus`:
+Alle bustransfers zijn direct gerelateerd aan het kloksignaal.
+Bij elke klokcyclus is er datatransfer mogelijk.
+Als de slave niet voor het eind van de klokcyclus niet klaar is, geeft het het WAIT signaal.
+Als bij de volgende klokpuls het WAIT signaal high is wordt de read/write cyclus met een "wait state" verlengt.
+
+![sync-bus](../assets/synchrone-bus.png)
+
+### PCI-express
+
+De PCIe bus wordt in veel PC's gebruikt.
+Door de hoge snelheid van PCIe kunnen er veel apparaten verbonden worden met de CPU, zoals netwerkkaarten GPU, andere IO.
+Een PCIe bus is eigenlijk meer een point-to-point verbinding.  
+Hieronder is een mogelijke systemarchitectuur op basis van PCIe.
+
+![pcie](../assets/pcie-bus.png)
+
+### DMA
+
+Bij DMA (Direct Memory Access) word de CPU geholpen met IO door een DMA-controller of DMAC.
+Een CPU kan een DMAC gebruiken voor het lezen van een diskblok op een harde schijf.
+De DMAC krijgt van de CPU te horen waar in RAM de diskdata opgeslagen moet worden en hoeveel bytes de file is.
+De DMAC vraagt of de bus beschikbaar is.  
+Schrijfcyclus van de DMAC:
+
+1. Er is input van de IO
+2. De IO geeft een data request-singaal aan de DMAC
+3. De De CPU geeft een bus acknowledge als de bus beschikbaar is
+4. De DMAC geeft een data acknowledge aan het IO device.
+Het IO device zet de databus.
+De DMAC geeft het vrije RAM adres waar de data naartoe geschreven kan worden, en stuurt het proces aan via de controlebus.
+
+![dma-proces](../assets/dmac-proces.png)
+
+### Filesystemen
+
+Meestal bestaat een disk uit blokken en clusters.
+Een cluster bestaat dan weer uit meerdere clusters.
+
+`FAT`:
+File Allocation Table.
+Een FAT is een tabel waarin staat waar files op een disk staan.
+Een FAT gebruikt 16 bits getallen, wat betekend dat er maximaal 65536 diskblokken kunnen zijn.
+Voor moderne disks is dit niet genoeg, daarom wijst een FAT getal meestal naar een cluster.
+Een cluster is dan meestal meerdere blokken groot, maar een cluster kan ook 1 blok groot zijn.
+In een directory entry staan dingen zoals de filenaam, extensie en het startblok.
+Het FAT gatal bevat het clusternummer van het volgende cluster.
+Dit blijft zich opvolgen tot de end-of-file of EOF.
+Door de dist op te splitten in partities kun je de clustergrootte verminderen.
+Elke partitie is zijn eigen filesysteem, en heeft ook zijn eigen FAT.
+
+![fat](../assets/fat-filesysteem.png)
+
+`Unix i-node`:
+Een i-node filesysteem bestaat uit de volgende onderdelen:
+
+1. super block
+2. i-node bitmap
+3. zone bitmap
+4. i-nodes
+5. data-zones
+
+![unix-inode](../assets/unix-inode.png)
+
+**Super block**:  
+Belangrijke informatie over het filesysteem.
+Het is meestal op een vaste plek opgeslagen op de disk.
+Het bevat informatie zoals:  
+De grootte van het filesysteem, het aantal i-nodes en de plaats van de i-node bitmap, zone bitmap, i-nodes en datagebied.
+
+**I-node bitmap**:
+In de inode bitmap staat welke i-nodes vrij of in gebruik zijn.
+Voor 1 i-node wordt er 1 bit gebruikt.
+
+**Zone bitmap**:
+In de zone bitmap staat welke zones/clusters er vrij of in gebruik zijn.
+Voor 1 cluster wordt net zoals bij de i-node bitmap 1 bit gebruikt.
+
+**Inodes**:
+In het i-node gedeelte staan welke i-nodes er zijn.
+Een i-node bevat i-node zonenummers.  
+Dit is de opbouw van een inode:  
+
+1. Metadata zoals filetype, size, owner, group, permissions, links, times.
+2. De eerste 7 zonenummers wijzen naar een zone met data erin.  
+3. *Indirect zone*: Het volgende nummer wijst naar een zone waar geen data in staat, maar zonenummers van datazones. Er zit 1 laag tussen de datazones en het i-node nummer.
+4. *Double indirect zone*: Dit nummer wijst naar een zone, waar de zonenummers van andere zones staan. De zones uit deze zone wijzen naar datazones. De vandaar de naam double indirect zone. Er zitten 2 lagen tussen de datazones en het i-node nummer.
+5. *Triple inderect zones*: Dit nummer wijst naar een zone, die naar zones wijst, die naar zones wijzen, die naar datazones wijzen. Er zitten 3 lagen tussen de datazones en het i-node nummer.
+
+**Data-zones**:
+In het datagebied staat de inhoud van de files.
 
 ## Lightrider
 

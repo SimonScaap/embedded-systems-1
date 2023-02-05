@@ -273,7 +273,7 @@ Een active low RS-flipflop is een normale RS-flipflop maar dan zijn de de signal
 Er zijn 4 situaties mogelijk.  
 $J = K = 0$ : Q veranderd niet na triggering  
 $J = 1, K = 0$ : Q wordt (of blijft) 1  
-$J = 1, K = 0$ : Q wordt (of blijft) 0  
+$J = 0, K = 1$ : Q wordt (of blijft) 0  
 $J = K = 1$ : Q wordt geïnverteerd na klokpuls
 
 ![jk-flipflop](../assets/jk-flipflop-symbool.png)
